@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
     const stateList = ["letter out", "letter behind", "letter in"];
     const [displayIdx, setdisplayIdx] = useState(0);
-    const [letterState, setLetterState] = useState(0);
+    const [letterIdx, setLetterIdx] = useState(0);
     const [behindIdx, setBehindIdx] = useState(-1);
     useEffect(() => {
         const id = setInterval(() => {
@@ -15,13 +15,28 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                 setBehindIdx(nextIdx);
                 return nextIdx;
             });
-            setTimeout(() => setBehindIdx(-1), 200);
-        }, 1000);
+            setLetterIdx(0);
+            setTimeout(() => setBehindIdx(-1), 300);
+        }, 2000);
         return () => {
             clearInterval(id);
         };
       }, []);
-
+    useEffect(() => {
+        if(letterIdx === 0){
+            setTimeout(() => {
+                setLetterIdx(1)
+            }, 200)
+        }else if(letterIdx === 1){
+            setTimeout(() => {
+                setLetterIdx(2)
+            }, 200)
+        }else if(letterIdx === 2){
+            setTimeout(() => {
+                setLetterIdx(3)
+            }, 200)
+        }
+    }, [letterIdx])
   return (
     <>
         <span className="rotating-text">
@@ -31,11 +46,11 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                         return (
                             <span className={`word`} key={textId} style={{color:item.color}}>
                                 {item.text.split('').map((char:string, charId:number) => {
-
                                     return <span 
                                             className={
-                                                behindIdx === textId? stateList[1]:
-                                                displayIdx === textId? stateList[2]: stateList[0]
+                                                displayIdx === textId ?
+                                                letterIdx <= charId ? stateList[1]: stateList[2]: 
+                                                stateList[0]
                                             }
                                             key={charId}>
                                                 {char}
