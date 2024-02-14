@@ -13,9 +13,9 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
             setdisplayIdx(prevIdx => {
                 const nextIdx = (prevIdx + 1) % itemList.length;
                 setBehindIdx(nextIdx);
-                setTimeout(() => setBehindIdx(-1), 200);
                 return nextIdx;
             });
+            setTimeout(() => setBehindIdx(-1), 200);
         }, 1000);
         return () => {
             clearInterval(id);
