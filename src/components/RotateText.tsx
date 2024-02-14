@@ -5,15 +5,12 @@ import { useEffect, useState } from 'react'
 //   full   gradual  gradual
 function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
     const stateList = ["letter out", "letter behind", "letter in"];
-    const [textState, settextState] = useState(0);
+    const [displayIdx, setdisplayIdx] = useState(0);
+    const [letterState, setLetterState] = useState(0);
     const [behindState, setBehindState] = useState(true);
     useEffect(() => {
         const id = setInterval(() => {
-            setBehindState(true);
-            setTimeout(() => {
-                setBehindState(false);
-            }, 200)
-            settextState(prevState => {
+            setdisplayIdx(prevState => {
                 return (prevState + 1) % itemList.length;
             });
         }, 1000);
@@ -32,8 +29,10 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                             <span className={`word`} key={textId} style={{color:item.color}}>
                                 {item.text.split('').map((char:string, charId:number) => {
                                     return <span 
-                                            className={textState === textId? (behindState? stateList[1]: stateList[2])
-                                                : stateList[0]}
+                                            className={
+                                                displayIdx === textId? stateList[2]:
+                                                displayIdx === (textId + 1) % itemList.length? stateList[0]: stateList[1]
+                                            }
                                             key={charId}>
                                                 {char}
                                             </span>;
