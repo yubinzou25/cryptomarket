@@ -50,7 +50,8 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                                             className={
                                                 displayIdx === textId ?
                                                 letterIdx <= charId ? stateList[1]: stateList[2]: 
-                                                stateList[0]
+                                                displayIdx === (textId + 1) % itemList.length ?
+                                                letterIdx <= charId ? stateList[2]: stateList[0]: stateList[0]
                                             }
                                             key={charId}>
                                                 {char}
