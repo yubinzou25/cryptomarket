@@ -7,18 +7,21 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
     const stateList = ["letter out", "letter behind", "letter in"];
     const [displayIdx, setdisplayIdx] = useState(0);
     const [letterState, setLetterState] = useState(0);
-    const [behindState, setBehindState] = useState(true);
+    const [behindIdx, setBehindIdx] = useState(-1);
     useEffect(() => {
         const id = setInterval(() => {
-            setdisplayIdx(prevState => {
-                return (prevState + 1) % itemList.length;
+            setdisplayIdx(prevIdx => {
+                const nextIdx = (prevIdx + 1) % itemList.length;
+                setBehindIdx(nextIdx);
+                setTimeout(() => setBehindIdx(-1), 200);
+                return nextIdx;
             });
         }, 1000);
-
         return () => {
             clearInterval(id);
         };
       }, []);
+
   return (
     <>
         <span className="rotating-text">
@@ -28,10 +31,11 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                         return (
                             <span className={`word`} key={textId} style={{color:item.color}}>
                                 {item.text.split('').map((char:string, charId:number) => {
+
                                     return <span 
                                             className={
-                                                displayIdx === textId? stateList[2]:
-                                                displayIdx === (textId + 1) % itemList.length? stateList[0]: stateList[1]
+                                                behindIdx === textId? stateList[1]:
+                                                displayIdx === textId? stateList[2]: stateList[0]
                                             }
                                             key={charId}>
                                                 {char}
