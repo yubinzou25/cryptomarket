@@ -9,14 +9,15 @@ function HomePage() {
     ]
   return (
     <div>
-        {/* <Banner/> */}
-        <RotateText
+        <Banner/>
+        {/* <RotateText
             itemList={[
                 {text:"BTC", color:"#ffc107"}, 
                 {text:"ETH", color:"#bc4fd5"}, 
                 {text:"SUI", color:"#75d1b2"}
             ]}
-        />
+            letterNum = {3}
+        /> */}
         {/* <ScrollCard
             cardWidth={400}
             cardHeight={200}

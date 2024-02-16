@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
-    const letterNumr = 3;
+function RotateText({itemList, letterNum} : {itemList: {text: string, color:string}[], letterNum:number}) {
     const [displayIdx, setdisplayIdx] = useState(0);
     const [letterIdx, setLetterIdx] = useState(0);
     useEffect(() => {
@@ -16,16 +15,17 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
         };
       }, []);
     useEffect(() => {
-        const nextLetterIdx = (letterIdx + 1) % (letterNumr + 1);
+        const nextLetterIdx = (letterIdx + 1) % (letterNum + 1);
         if(nextLetterIdx !== 0){
             const timer = setTimeout(() => {
                 setLetterIdx(nextLetterIdx);
             }, 200);
             return () => clearTimeout(timer);
         }
-    }, [letterIdx, letterNumr])
+    }, [letterIdx, letterNum])
   return (
-    <>
+    <div className="block-container">
+    <div className="block-only-display">
         <span className="rotating-text">
             <p>
                 {
@@ -60,7 +60,8 @@ function RotateText({itemList} : {itemList: {text: string, color:string}[]}) {
                 }
             </p>
         </span>
-    </>
+        </div>
+    </div>
   );
 }
 
