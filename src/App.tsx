@@ -1,4 +1,6 @@
 
+import Footer from './components/Footer';
+import NavaBar from './components/NavaBar';
 import HomePage from './pages/HomePage';
 
 
@@ -7,10 +9,12 @@ function App() {
 
   return (
     <>
-      <HomePage/>
-      <div>
-        
-      </div>
+      <NavaBar/>
+      <main>
+        <HomePage/>
+      </main>
+      <Footer/>
+
     </>
   );
 };
