@@ -1,12 +1,13 @@
 import React from 'react'
 import RotateText from './RotateText'
+import { Link } from 'react-router-dom'
 
 function Banner() {
   return (
 
     <main className="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24">
       <div className="py-6 md:order-1 hidden md:block">
-        <img src="/image/banner.png" width={600} height={600}/>
+        <img src="/image/banner.png" width={500} height={500}/>
       </div>
       <div>
         <h1
@@ -19,7 +20,6 @@ function Banner() {
           create any website with this starter.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
-
         </div>
       </div>
     </main>
