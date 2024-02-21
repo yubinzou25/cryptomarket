@@ -10,16 +10,36 @@ function Banner() {
         <img src="/image/banner.png" width={500} height={500}/>
       </div>
       <div>
-        <h1
+        <div
           className="text-6xl lg:text-7xl xl:text-8xl font-bold lg:tracking-tight xl:tracking-tighter">
-          BUY, TRADE ON DIGIFINEX
-        </h1>
+          BUY, TRADE
+          <RotateText
+            itemList={[
+                {text:"BTC", color:"#ffc107"}, 
+                {text:"ETH", color:"#bc4fd5"}, 
+                {text:"SUI", color:"#75d1b2"}
+            ]}
+            letterNum = {3}
+        />
+        </div>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
           Astroship is a starter template for startups, marketing websites & landing
           pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly
           create any website with this starter.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <Link
+              to='/'
+              className="flex gap-1 items-center justify-center"
+              >
+              Download for Free
+            </Link>
+            <Link
+              to='/'
+              className="flex gap-1 items-center justify-center"
+              >
+              GitHub Repo
+            </Link>
         </div>
       </div>
     </main>
