@@ -11,13 +11,13 @@ function Banner() {
       </div>
       <div>
         <div
-          className="text-6xl lg:text-7xl xl:text-8xl font-bold lg:tracking-tight xl:tracking-tighter">
+          className="text-5xl lg:text-7xl xl:text-8xl font-bold lg:tracking-tight xl:tracking-wider">
           BUY, TRADE
           <RotateText
             itemList={[
                 {text:"BTC", color:"#ffc107"}, 
-                {text:"ETH", color:"#bc4fd5"}, 
-                {text:"SUI", color:"#75d1b2"}
+                {text:"BTC", color:"#bc4fd5"}, 
+                {text:"BTC", color:"#75d1b2"}
             ]}
             letterNum = {3}
         />

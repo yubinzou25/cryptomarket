@@ -15,6 +15,12 @@ function NavaBar() {
     {
       title: 'Buy Crypto',
       path: '/buycrypto',
+      children: [
+        { title: "Action", path: "/" },
+        { title: "Another action", path: "#" },
+        { title: "Dropdown Submenu", path: "#" },
+        { title: "404 Page", path: "/404" },
+      ],
     },
     {
       title: 'Market',
@@ -54,6 +60,7 @@ function NavaBar() {
             <ul className="flex flex-col lg:flex-row lg:gap-3">
               {
                 menuitems.map((item, index) => (
+                  <>
                     <div
                       onMouseEnter={() => handleMouseEnter(index)}
                       onMouseLeave={handleMouseLeave}
@@ -73,6 +80,27 @@ function NavaBar() {
                             d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                         </svg>
                     </div>
+                    { item.children && 
+                      <div
+                        className="lg:absolute w-full lg:w-48 z-10 lg:left-0 origin-top-right"
+                      >
+                      <div
+                        className="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
+                        {
+                          item.children.map((child, childIdx) => (
+                            <a
+                              href={child.path}
+                              className="py-1 text-gray-600 hover:text-gray-900"
+                              key={childIdx}
+                              >
+                              {child.title}
+                            </a>
+                          ))
+                        }
+                      </div>
+                    </div>
+                    }
+                  </>
                 ))
               }
             </ul>
