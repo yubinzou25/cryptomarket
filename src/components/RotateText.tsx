@@ -9,23 +9,22 @@ function RotateText({itemList, letterNum} : {itemList: {text: string, color:stri
                 return nextIdx;
             });
             setLetterIdx(0);
-        }, 2000);
+        }, 3000);
         return () => {
             clearInterval(id);
         };
       }, []);
     useEffect(() => {
-        const nextLetterIdx = (letterIdx + 1) % (letterNum + 1);
+        const nextLetterIdx = (letterIdx + 1) % (letterNum + 3);
         if(nextLetterIdx !== 0){
             const timer = setTimeout(() => {
                 setLetterIdx(nextLetterIdx);
-            }, 200);
+            }, 300);
             return () => clearTimeout(timer);
         }
     }, [letterIdx, letterNum])
   return (
-    <div className="block-container">
-    <div className="block-only-display">
+
         <span className="rotating-text">
             <p>
                 {
@@ -38,7 +37,7 @@ function RotateText({itemList, letterNum} : {itemList: {text: string, color:stri
                                                 // If the current item is the one being displayed
                                             displayIdx === textId ? (
                                                 // If the current letter is behind or in front of the rotating letter
-                                                letterIdx <= charId ? "letter behind" : "letter in"
+                                                letterIdx <= charId + 1? "letter behind" : "letter in"
                                             ) : (
                                                 // If the next item to be displayed is the one containing this letter
                                                 displayIdx === (textId + 1) % itemList.length ? (
@@ -60,8 +59,6 @@ function RotateText({itemList, letterNum} : {itemList: {text: string, color:stri
                 }
             </p>
         </span>
-        </div>
-    </div>
   );
 }
 

@@ -52,7 +52,7 @@
 }
 
 .rotating-text p .word {
-  opacity: 1
+  opacity: 1;
 }
 
 .rotating-text p .word .letter {
@@ -73,13 +73,49 @@
 }
 
 .block-container {
-  width: 50px; /* Set the desired width */
-  height: 18px; /* Set the desired height */
-  overflow: hidden; /* Hide any content that exceeds the defined size */
+  position: relative;
 }
 
 .block-only-display {
   position: relative;
   width: 100%;
   height: 100%;
+}
+.Banner-module {
+  max-width: 1760px;
+  background-color: var(--color-white-white);
+  padding: 0 80px;
+  margin: 0 auto;
+  background-size: contain;
+  overflow: hidden;
+}
+.Banner-module-bannerIn {
+  height: 556px;
+  background-size: 4.08rem 3.36rem;
+}
+.Banner-module-text1 {
+  font-size: 48px;
+  line-height: 56px;
+}
+.Banner-module-text2 {
+  font-size: 48px;
+  line-height: 56px;
+}
+.Banner-module-img {
+  height: 0;
+  width: 16.18rem;
+  background-image: url(/image/1.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.rotate-180{
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x),
+  var(--tw-translate-y))
+  rotate(var(--tw-rotate))
+  skewX(var(--tw-skew-x))
+  skewY(var(--tw-skew-y))
+  scaleX(var(--tw-scale-x))
+  scaleY(var(--tw-scale-y));
 }
