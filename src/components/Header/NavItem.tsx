@@ -36,29 +36,37 @@ function NavItem({item}:{item:NavItem}) {
             </div>
             {/* ${!isHovered && 'hidden'} */}
             { item.children &&
-                <div className={`absolute block w-0 z-10 ${!isHovered && 'hidden'} transition-opacity duration-1000`} aria-expanded={isHovered}>
-                    <div
-                    className="w-full lg:w-48 z-10 lg:left-0 origin-top-right"
-                    >
-                        <div
-                            className="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
-                            {
-                            item.children.map((child, childIdx) => (
-                                <a
-                                href={child.path}
-                                className="py-1 text-gray-600 hover:text-gray-900"
-                                key={childIdx}
-                                >
-                                {child.title}
-                                </a>
-                            ))
-                            }
-                        </div>
-                    </div>
-                </div>
+                <DropDown
+                    toggle={isHovered}
+                    dropDownItem={item.children}
+                    />
             }
     </div>
   )
+}
+function DropDown({toggle, dropDownItem}:{toggle:boolean, dropDownItem:DropDownItem[]}){
+    return (
+        <div className={`absolute w-0 z-10 ${toggle? 'block': 'hidden'} transition-opacity duration-1000`} aria-expanded={toggle}>
+            <div
+            className="w-full lg:w-48 z-10 lg:left-0 origin-top-right"
+            >
+                <div
+                    className="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
+                    {
+                    dropDownItem.map((item, index) => (
+                        <a
+                        href={item.path}
+                        className="py-1 text-gray-600 hover:text-gray-900"
+                        key={index}
+                        >
+                        {item.title}
+                        </a>
+                    ))
+                    }
+                </div>
+            </div>
+        </div>
+    )
 }
 function DropDownIcon({toggle}:{toggle:boolean}){
     return (
