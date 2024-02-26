@@ -1,23 +1,21 @@
 
 import Footer from './components/Footer';
-import NavaBar from './components/NavaBar';
 import HomePage from './pages/HomePage';
-
+import Header from './components/Header';
 
 function App() {
 
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5">
-      <NavaBar/>
+    <div className="mx-auto max-w-screen-2xl px-20">
+      <Header/>
       <main>
         <HomePage/>
       </main>
       <Footer/>
-
     </div>
   );
-};
+}
 
 
 export default App
