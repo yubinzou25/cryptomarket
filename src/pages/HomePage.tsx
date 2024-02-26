@@ -1,7 +1,6 @@
 import React from 'react'
-import ScrollCard from '../components/ScrollCard'
-import RotateText from '../components/RotateText'
-import Banner from '../components/Banner'
+import ScrollCard from '../components/ScrollCard';
+import Banner from '../components/Banner';
 
 function HomePage() {
     const cardList = [
