@@ -1,6 +1,7 @@
 import React from 'react'
 import ScrollCard from '../components/ScrollCard';
 import Banner from '../components/Banner';
+import ProductInfo from '../components/ProductInfo';
 
 function HomePage() {
     const cardList = [
@@ -14,6 +15,7 @@ function HomePage() {
           cardHeight={200}
           cardList={cardList}
       />
+      <ProductInfo/>
     </>
   )
 }
