@@ -10,17 +10,20 @@ function Banner() {
         <img src="/image/banner.png" width={500} height={500}/>
       </div>
       <div>
-        <div
-          className="text-5xl lg:text-7xl xl:text-8xl font-bold lg:tracking-tight xl:tracking-wider">
-          BUY, TRADE
-          <RotateText
-            itemList={[
-                {text:"BTC", color:"#ffc107"}, 
-                {text:"BTC", color:"#bc4fd5"}, 
-                {text:"BTC", color:"#75d1b2"}
-            ]}
-            letterNum = {3}
-        />
+        <div className="flex flex-col text-4xl lg:text-6xl xl:text-7xl font-extrabold lg:tracking-tight xl:tracking-wider">
+          <div
+            className="flex flex-row gap-10">
+            <h1>BUY, TRADE</h1>
+            <RotateText
+              itemList={[
+                  {text:"BTC", color:"#ffc107"}, 
+                  {text:"BTC", color:"#bc4fd5"}, 
+                  {text:"BTC", color:"#75d1b2"}
+              ]}
+              letterNum = {3}
+            />
+          </div>
+          <h1>ON DIGIFINEX</h1>
         </div>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
           Astroship is a starter template for startups, marketing websites & landing
