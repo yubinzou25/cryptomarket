@@ -1,7 +1,7 @@
 import React from 'react'
-import ScrollCard from '../components/ScrollCard';
-import Banner from '../components/Banner';
-import ProductInfo from '../components/ProductInfo';
+import ScrollCard from './ScrollCard';
+import Banner from './Banner';
+import ProductInfo from './ProductInfo';
 
 function HomePage() {
     const cardList = [
