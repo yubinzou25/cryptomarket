@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 function ProductInfo() {
     const productItems = ['a', 'b', 'c', 'd', 'e', 'f'];
     return (
-    <div className="flex flex-wrap gap-y-5">
+    <div className="flex flex-col space-y-10">
+        <h2 className="text-2xl lg:text-3xl xl:text-4xl font-bold">
+            Explore Our Product
+        </h2>
+        <div className="flex flex-wrap gap-y-5">
         {productItems.map((item, index) => (
                 <FloatingCard
                     linkPath="/"
@@ -14,6 +18,7 @@ function ProductInfo() {
                 />
             )
         )}
+        </div>
     </div>
   )
 }
