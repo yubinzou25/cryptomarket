@@ -1,27 +1,58 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function ProductInfo() {
     const productItems = ['a', 'b', 'c', 'd', 'e', 'f'];
     return (
     <div className="flex flex-wrap">
         {productItems.map((item, index) => (
-            <div className="w-full md:w-1/2 p-4 md:p-2">
-                <FloatingCard/>
-            </div>
+                <FloatingCard
+                    linkPath="/"
+                    headText="Spot"
+                    mainText="Buy and sell over 700 types of cryptocurrencies at discounted transaction fees."
+                    imgPath="/image/product_01.svg"
+                />
             )
         )}
     </div>
   )
 }
-
-function FloatingCard() {
+// Buy and sell over 700 types of cryptocurrencies at discounted transaction fees.
+function FloatingCard({linkPath, headText, mainText, imgPath}:
+    {linkPath:string, headText:string, mainText:string, imgPath:string}) {
     return (
-        <a
-        href="#"
-        className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-        >
-          Hover Me
-        </a>
+        <div className="w-full md:w-1/2 p-4 md:p-2">
+            <Link
+            to={linkPath}
+            >
+                <div
+                className="border border-gray-300 p-4 rounded-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                    <div
+                    className="flex flex-row justify-between"
+                    >
+                        <div
+                        className="flex flex-col justify-between w-1/2"
+                        >
+                            <div>{headText}</div>
+                            <div
+                            className="mb-20"
+                            >{mainText}</div>
+                            <div>learn more</div>
+                        </div>
+                        <div
+                        className="bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url("${imgPath}")`,
+                            width: "200px",
+                            height: "200px",
+                        }}
+                        >
+                    </div>
+                    </div>
+                </div>
+            </Link>
+        </div>
     )
   }
 
