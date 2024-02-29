@@ -2,7 +2,9 @@ import React from 'react'
 
 function Journey() {
   return (
-    <div>Journey</div>
+    <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+        Journey
+    </div>
   )
 }
 

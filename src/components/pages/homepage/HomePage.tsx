@@ -2,6 +2,10 @@ import React from 'react'
 import ScrollCard from './ScrollCard';
 import Banner from './Banner';
 import ProductInfo from './ProductInfo';
+import WhyChoose from './WhyChoose';
+import StartTrade from './StartTrade';
+import Download from './Download';
+import Journey from './Journey';
 
 function HomePage() {
     const cardList = [
@@ -17,6 +21,11 @@ function HomePage() {
           cardList={cardList}
       />
       <ProductInfo/>
+      <WhyChoose/>
+      <StartTrade/>
+      <Download/>
+      <Journey/>
+
     </div>
     
   )

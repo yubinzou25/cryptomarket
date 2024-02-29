@@ -2,7 +2,9 @@ import React from 'react'
 
 function StartTrade() {
   return (
-    <div>StartTrade</div>
+    <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+        StartTrade
+    </div>
   )
 }
 

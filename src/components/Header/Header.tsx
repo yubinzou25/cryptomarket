@@ -29,7 +29,7 @@ function Header() {
 function Logo() {
     return (
         <Link to="/" className="text-lg"
-            ><span className="font-bold text-slate-800">DIGIF</span><span
+            ><span className="font-semibold text-slate-800">DIGIF</span><span
             className="text-slate-500">INEX</span>
         </Link>
     );
