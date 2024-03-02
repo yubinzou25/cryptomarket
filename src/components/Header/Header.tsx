@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
+import LinkButton from '../util/LinkButton';
 
 function Header() {
     return (
@@ -15,8 +16,8 @@ function Header() {
                     </div>
                     {/* right side header contains menu and Login/SignUp Button*/}
                     <div className="flex flex-row items-center gap-4">
-                        <Link className="hidden sm:block" to="#">Log in</Link>
-                        <Link className="hidden sm:block bg-primary-default rounded-md p-1" to="#">Sign up</Link>
+                        <LinkButton to="/" buttonText="Log in" primaryColor={false}/>
+                        <LinkButton to="/" buttonText="Sign up" primaryColor={true}/>
                         <MenuButton/>
                     </div>
                 </div>

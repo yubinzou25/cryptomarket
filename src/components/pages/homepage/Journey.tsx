@@ -1,4 +1,5 @@
 import React from 'react'
+import LinkButton from '../../util/LinkButton'
 
 function Journey() {
   return (
@@ -7,9 +8,7 @@ function Journey() {
           Register & Start Trading!
         </div>
         <div className="flex justify-center">
-        <button className="bg-primary-default hover:bg-primary-hover rounded-md p-1">
-            {'Register Now ->'}
-          </button>
+        <LinkButton to="/" buttonText="Register Now ->" primaryColor={true}/>
         </div>
     </div>
   )

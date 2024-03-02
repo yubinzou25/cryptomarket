@@ -1,3 +1,4 @@
+import LinkButton from "../../util/LinkButton";
 
 
 function StartTrade() {
@@ -22,13 +23,11 @@ function StartTrade() {
           />
           ))}
         </div>
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row justify-center ">
           <input 
-            className="bg-gray-200 placeholder:text-sm placeholder:p-2"
+            className="w-64 rounded-lg border focus:border-gray-500 bg-gray-200 placeholder:text-sm placeholder:p-2"
             placeholder="Email or Phone Number"/>
-          <button className="bg-primary-default hover:bg-primary-hover rounded-md p-1">
-            Register Now
-          </button>
+          <LinkButton to="/" buttonText="Register Now" primaryColor={true}/>
         </div>
       </div>
     </div>
