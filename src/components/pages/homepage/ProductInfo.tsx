@@ -5,7 +5,7 @@ function ProductInfo() {
     const productItems = ['a', 'b', 'c', 'd', 'e', 'f'];
     return (
     <div className="flex flex-col space-y-20">
-        <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
+        <div className="text-3xl lg:text-4xl xl:text-5xl font-semibold">
             Explore Our Product
         </div>
         <div className="flex flex-wrap gap-y-5">

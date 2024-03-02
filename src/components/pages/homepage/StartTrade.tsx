@@ -8,11 +8,12 @@ function StartTrade() {
 
   ];
   return (
-    <div className="flex flex-col space-y-20 bg-gray-50 text-center">
-        <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold mt-10">
+    <div className="py-20 px-10 bg-gray-50">
+      <div className="flex flex-col space-y-20 justify-between">
+        <div className="text-3xl lg:text-4xl xl:text-5xl text-center font-semibold">
             Start Trade in 1 Minute
         </div>
-        <div className="flex flex-row w-3/4 mx-auto justify-between text-lg font-semibold">
+        <div className="flex flex-row mx-auto justify-between text-center">
           {points.map((point, index) => (
           <NumberPoint
             text={point}
@@ -20,9 +21,13 @@ function StartTrade() {
           />
           ))}
         </div>
-        <div>input</div>
-        <div className="flex flex-row">
+        <div className="flex flex-row justify-center">
+          <input/>
+          <button>
+            Register Now
+          </button>
         </div>
+      </div>
     </div>
   )
 }
