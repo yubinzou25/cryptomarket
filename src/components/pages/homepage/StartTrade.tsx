@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 function StartTrade() {
   const points = [
@@ -22,8 +22,10 @@ function StartTrade() {
           ))}
         </div>
         <div className="flex flex-row justify-center">
-          <input/>
-          <button>
+          <input 
+            className="bg-gray-200 placeholder:text-sm placeholder:p-2"
+            placeholder="Email or Phone Number"/>
+          <button className="bg-primary-default hover:bg-primary-hover rounded-md p-1">
             Register Now
           </button>
         </div>

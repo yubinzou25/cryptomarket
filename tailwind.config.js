@@ -11,6 +11,14 @@ export default {
       'md': '800px',
       'lg': '1200px',
       'xl': '1800px',
+    },
+    extend: {
+      colors: {
+        primary: {
+          default: '#00E5DB',
+          hover: '#00d5c8'
+        },
+      }
     }
   }
 }
