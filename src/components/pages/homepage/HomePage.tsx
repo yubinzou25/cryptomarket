@@ -4,8 +4,7 @@ import Banner from './Banner';
 import ProductInfo from './ProductInfo';
 import WhyChoose from './WhyChoose';
 import StartTrade from './StartTrade';
-import Download from './Download';
-import Journey from './Journey';
+import TradeAnywhere from './TradeAnywhere';
 
 function HomePage() {
     const cardList = [
@@ -23,9 +22,7 @@ function HomePage() {
       <ProductInfo/>
       <WhyChoose/>
       <StartTrade/>
-      <Download/>
-      <Journey/>
-
+      <TradeAnywhere/>
     </div>
     
   )
