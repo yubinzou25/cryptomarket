@@ -4,16 +4,22 @@ import { Link } from 'react-router-dom';
 function ProductInfo() {
     const productItems = ['a', 'b', 'c', 'd', 'e', 'f'];
     return (
-    <div className="flex flex-wrap gap-y-5">
+    <div className="flex flex-col space-y-20">
+        <div className="text-3xl lg:text-4xl font-semibold">
+            Explore Our Product
+        </div>
+        <div className="flex flex-wrap gap-y-5">
         {productItems.map((item, index) => (
                 <FloatingCard
                     linkPath="/"
                     headText="Spot"
                     mainText="Buy and sell over 700 types of cryptocurrencies at discounted transaction fees."
                     imgPath="/image/product_01.svg"
+                    key={index}
                 />
             )
         )}
+        </div>
     </div>
   )
 }

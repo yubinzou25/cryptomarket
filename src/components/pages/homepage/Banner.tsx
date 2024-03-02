@@ -10,7 +10,7 @@ function Banner() {
         <img src="/image/banner.png" width={500} height={500}/>
       </div>
       <div>
-        <div className="flex flex-col text-4xl lg:text-6xl xl:text-7xl font-extrabold lg:tracking-tight xl:tracking-wider">
+        <div className="flex flex-col text-5xl lg:text-7xl font-extrabold lg:tracking-tight xl:tracking-wider">
           <div
             className="flex flex-row gap-10">
             <h1>BUY, TRADE</h1>

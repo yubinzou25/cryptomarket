@@ -2,6 +2,10 @@ import React from 'react'
 import ScrollCard from './ScrollCard';
 import Banner from './Banner';
 import ProductInfo from './ProductInfo';
+import WhyChoose from './WhyChoose';
+import StartTrade from './StartTrade';
+import Download from './Download';
+import Journey from './Journey';
 
 function HomePage() {
     const cardList = [
@@ -9,7 +13,7 @@ function HomePage() {
     ]
   return (
     
-    <div className="flex flex-col gap-y-20">
+    <div className="flex flex-col gap-y-20 mb-20">
       <Banner/>
       <ScrollCard
           cardWidth={400}
@@ -17,6 +21,11 @@ function HomePage() {
           cardList={cardList}
       />
       <ProductInfo/>
+      <WhyChoose/>
+      <StartTrade/>
+      <Download/>
+      <Journey/>
+
     </div>
     
   )

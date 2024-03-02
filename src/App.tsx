@@ -7,7 +7,7 @@ function App() {
 
 
   return (
-    <div className="mx-auto max-w-screen-2xl px-20">
+    <div className="mx-auto max-w-screen-xl px-20">
       <Header/>
       <main>
         <HomePage/>

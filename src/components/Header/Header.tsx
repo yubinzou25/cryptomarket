@@ -14,9 +14,9 @@ function Header() {
                         <NavBar/>
                     </div>
                     {/* right side header contains menu and Login/SignUp Button*/}
-                    <div className="flex flex-row items-start gap-4">
+                    <div className="flex flex-row items-center gap-4">
                         <Link className="hidden sm:block" to="#">Log in</Link>
-                        <Link className="hidden sm:block" to="#">Sign up</Link>
+                        <Link className="hidden sm:block bg-primary-default rounded-md p-1" to="#">Sign up</Link>
                         <MenuButton/>
                     </div>
                 </div>
@@ -28,9 +28,17 @@ function Header() {
 }
 function Logo() {
     return (
+        // To do need to refactor
         <Link to="/" className="text-lg"
-            ><span className="font-bold text-slate-800">DIGIF</span><span
-            className="text-slate-500">INEX</span>
+        >
+            <div
+            className="bg-no-repeat bg-cover bg-center"
+            style={{
+                backgroundImage: `url("/image/logo.svg")`,
+                width: "200px",
+                height: "40px",
+            }}
+            />
         </Link>
     );
 }
