@@ -3,7 +3,7 @@ import React from 'react'
 function WhyChoose() {
   return (
     <div className="flex flex-col space-y-20">
-        <div className="text-1xl lg:text-2xl xl:text-3xl font-semibold">
+        <div className="text-2xl lg:text-3xl xl:text-4xl font-semibold">
             Why Choose DigiFinex
         </div>
         <div className="flex flex-row">
