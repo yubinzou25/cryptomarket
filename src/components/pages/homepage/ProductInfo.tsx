@@ -15,6 +15,7 @@ function ProductInfo() {
                     headText="Spot"
                     mainText="Buy and sell over 700 types of cryptocurrencies at discounted transaction fees."
                     imgPath="/image/product_01.svg"
+                    key={index}
                 />
             )
         )}

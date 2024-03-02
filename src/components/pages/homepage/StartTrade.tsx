@@ -18,6 +18,7 @@ function StartTrade() {
           <NumberPoint
             text={point}
             index={index}
+            key={index}
           />
           ))}
         </div>
@@ -35,7 +36,7 @@ function StartTrade() {
 }
 function NumberPoint({text, index}:{text:string, index: number}) {
   return (
-    <div className="flex-1 p-10 flex flex-col" key={index}>
+    <div className="flex-1 p-10 flex flex-col">
       <div className="font-extrabold">{index + 1}</div>
       <div className="text-lg font-semibold">
           {text}
