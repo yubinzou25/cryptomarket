@@ -32,13 +32,13 @@ function Logo() {
         <Link to="/" className="text-lg"
         >
             <div
+            className="bg-no-repeat bg-cover bg-center"
             style={{
                 backgroundImage: `url("/image/logo.svg")`,
                 width: "200px",
-                height: "39px",
+                height: "40px",
             }}
-            >
-            </div>
+            />
         </Link>
     );
 }

@@ -13,7 +13,7 @@ function HomePage() {
     ]
   return (
     
-    <div className="flex flex-col gap-y-20">
+    <div className="flex flex-col gap-y-20 mb-20">
       <Banner/>
       <ScrollCard
           cardWidth={400}

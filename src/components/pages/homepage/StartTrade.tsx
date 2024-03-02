@@ -10,7 +10,7 @@ function StartTrade() {
   return (
     <div className="py-20 px-10 bg-gray-50">
       <div className="flex flex-col space-y-20 justify-between">
-        <div className="text-3xl lg:text-4xl xl:text-5xl text-center font-semibold">
+        <div className="text-3xl lg:text-4xl text-center font-semibold">
             Start Trade in 1 Minute
         </div>
         <div className="flex flex-row mx-auto justify-between text-center">
