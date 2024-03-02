@@ -28,9 +28,17 @@ function Header() {
 }
 function Logo() {
     return (
+        // To do need to refactor
         <Link to="/" className="text-lg"
-            ><span className="font-semibold text-slate-800">DIGIF</span><span
-            className="text-slate-500">INEX</span>
+        >
+            <div
+            style={{
+                backgroundImage: `url("/image/logo.svg")`,
+                width: "200px",
+                height: "39px",
+            }}
+            >
+            </div>
         </Link>
     );
 }
