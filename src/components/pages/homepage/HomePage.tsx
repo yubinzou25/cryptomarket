@@ -15,9 +15,9 @@ function HomePage() {
     <div className="flex flex-col gap-y-20 mb-20">
       <Banner/>
       <ScrollCard
-          cardWidth={400}
-          cardHeight={200}
-          cardList={cardList}
+        cardWidth={400}
+        cardHeight={200}
+        cardList={cardList}
       />
       <ProductInfo/>
       <WhyChoose/>
