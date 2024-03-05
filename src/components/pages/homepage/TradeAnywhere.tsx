@@ -1,4 +1,5 @@
-import LinkButton from "../../util/LinkButton"
+import LinkButton from "../../util/LinkButton";
+
 
 function TradeAnywhere() {
   return (
@@ -10,6 +11,8 @@ function TradeAnywhere() {
             <div className="text-xl text-gray-500 font-light mt-5">
               Stay in the know with our app and desktop client.
             </div>
+          </div>
+          <div className="flex flex-wrap">
           </div>
           
         </div>
