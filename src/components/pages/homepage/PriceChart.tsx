@@ -17,6 +17,20 @@ function PriceChart() {
       <ResponsiveContainer width={700} height={500}>
       <AreaChart data={priceData}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <defs>
+          <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="0%"
+              stopColor="#00E5DB"
+              stopOpacity={0.3}
+            />
+            <stop
+              offset="100%"
+              stopColor="#00E5DB"
+              stopOpacity={0}
+            />
+          </linearGradient>
+        </defs>
       <XAxis dataKey="time"
         axisLine={false}
         tickLine={false}/>
@@ -26,7 +40,13 @@ function PriceChart() {
         orientation="right"
         domain={['auto', 'auto']}/>
       <Tooltip />
-      <Area type="monotone" dataKey="price" stroke="#8884d8" dot={false}/>
+      <Area
+      type="monotone"
+      dataKey="price"
+      stroke="#00E5DB"
+      dot={false}
+      fill="url(#colorPrice)"
+      />
       </AreaChart>
       </ResponsiveContainer>
     </div>
