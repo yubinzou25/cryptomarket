@@ -1,0 +1,51 @@
+
+import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
+function Chart(data:any) {
+  
+  return (
+    <div className="flex justify-center">
+      <ResponsiveContainer width={"100%"} height={500}>
+      <AreaChart data={data}
+      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <defs>
+            <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+            <stop
+                offset="0%"
+                stopColor="#00E5DB"
+                stopOpacity={0.3}
+            />
+            <stop
+                offset="100%"
+                stopColor="#00E5DB"
+                stopOpacity={0}
+            />
+            </linearGradient>
+        </defs>
+      <XAxis dataKey="time"
+        axisLine={false}
+        tickLine={false}
+        minTickGap={100}
+        padding={{left:50, right:50}}
+        />
+      <YAxis dataKey="price"
+        axisLine={false}
+        tickLine={false}
+        orientation="right"
+        padding={{top:50, bottom:50}}
+        domain={['auto', 'auto']}
+        />
+      <Tooltip />
+      <Area
+      type="monotone"
+      dataKey="price"
+      stroke="#00d5c8"
+      dot={false}
+      fill="url(#colorPrice)"
+      />
+      </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+export default Chart
