@@ -33,17 +33,22 @@ function PriceChart() {
         </defs>
       <XAxis dataKey="time"
         axisLine={false}
-        tickLine={false}/>
+        tickLine={false}
+        minTickGap={100}
+        padding={{left:50, right:50}}
+        />
       <YAxis dataKey="price"
         axisLine={false}
         tickLine={false}
         orientation="right"
-        domain={['auto', 'auto']}/>
+        padding={{top:50, bottom:50}}
+        domain={['auto', 'auto']}
+        />
       <Tooltip />
       <Area
       type="monotone"
       dataKey="price"
-      stroke="#00E5DB"
+      stroke="#00d5c8"
       dot={false}
       fill="url(#colorPrice)"
       />
