@@ -4,8 +4,8 @@ import Banner from './Banner';
 import ProductInfo from './ProductInfo';
 import WhyChoose from './WhyChoose';
 import StartTrade from './StartTrade';
-import Download from './Download';
-import Journey from './Journey';
+import TradeAnywhere from './TradeAnywhere';
+import PriceChart from './PriceChart';
 
 function HomePage() {
     const cardList = [
@@ -16,16 +16,15 @@ function HomePage() {
     <div className="flex flex-col gap-y-20 mb-20">
       <Banner/>
       <ScrollCard
-          cardWidth={400}
-          cardHeight={200}
-          cardList={cardList}
+        cardWidth={400}
+        cardHeight={200}
+        cardList={cardList}
       />
+      <PriceChart/>
       <ProductInfo/>
       <WhyChoose/>
       <StartTrade/>
-      <Download/>
-      <Journey/>
-
+      <TradeAnywhere/>
     </div>
     
   )
