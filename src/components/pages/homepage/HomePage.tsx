@@ -5,6 +5,7 @@ import ProductInfo from './ProductInfo';
 import WhyChoose from './WhyChoose';
 import StartTrade from './StartTrade';
 import TradeAnywhere from './TradeAnywhere';
+import PriceChart from './PriceChart';
 
 function HomePage() {
     const cardList = [
@@ -19,6 +20,7 @@ function HomePage() {
         cardHeight={200}
         cardList={cardList}
       />
+      <PriceChart/>
       <ProductInfo/>
       <WhyChoose/>
       <StartTrade/>
