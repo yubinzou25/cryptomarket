@@ -2,6 +2,7 @@
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import BTC from '../../../test_data/BTC.json';
 import Chart from '../../util/Chart';
+import LinkButton from '../../util/LinkButton';
 function PriceChart() {
   const priceData = BTC.t.map((val, idx) => 
   {
@@ -14,7 +15,12 @@ function PriceChart() {
     return {time:formattedTime, price:BTC.h[idx] }
   });
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col md:flex-row justify-evenly">
+      <div className="flex flex-row md:flex-col justify-evenly">
+        <LinkButton to='/' buttonText='BTC' primaryColor={true}/>
+        <LinkButton to='/' buttonText='ETH' primaryColor={true}/>
+        <LinkButton to='/' buttonText='ARB' primaryColor={true}/>
+      </div>
       <Chart data={priceData}/>
     </div>
   )
