@@ -12,13 +12,13 @@ function Banner() {
       <div>
         <div className="flex flex-col text-5xl lg:text-7xl font-extrabold lg:tracking-tight xl:tracking-wider">
           <div
-            className="flex flex-row gap-10">
+            className="flex flex-row gap-5">
             <h1>BUY, TRADE</h1>
             <RotateText
               itemList={[
                   {text:"BTC", color:"#ffc107"}, 
-                  {text:"BTC", color:"#bc4fd5"}, 
-                  {text:"BTC", color:"#75d1b2"}
+                  {text:"ETH", color:"#bc4fd5"}, 
+                  {text:"USDT", color:"#75d1b2"}
               ]}
               letterNum = {3}
             />
