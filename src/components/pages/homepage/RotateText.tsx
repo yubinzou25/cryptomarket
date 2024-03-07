@@ -19,18 +19,18 @@ function RotateText({itemList, letterNum} : {itemList: {text: string, color:stri
         if(nextLetterIdx !== 0){
             const timer = setTimeout(() => {
                 setLetterIdx(nextLetterIdx);
-            }, 300);
+            }, 100);
             return () => clearTimeout(timer);
         }
     }, [letterIdx, letterNum])
   return (
 
-        <span className="rotating-text">
+        <div className="rotating-text">
             <p>
                 {
                     itemList.map((item:{text: string, color:string}, textId:number) => {
                         return (
-                            <span className={`word`} key={textId} style={{color:item.color}}>
+                            <span className="word flex flex-row" key={textId} style={{color:item.color}}>
                                 {item.text.split('').map((char:string, charId:number) => {
                                     return <span 
                                             className={
@@ -58,7 +58,7 @@ function RotateText({itemList, letterNum} : {itemList: {text: string, color:stri
                     })
                 }
             </p>
-        </span>
+        </div>
   );
 }
 
