@@ -2,7 +2,7 @@
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 function Chart({data}:{data: any}) {
   return (
-    <ResponsiveContainer width={"100%"} height={500}>
+    <ResponsiveContainer width={"100%"} height={600}>
       <AreaChart data={data}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
         <defs>
@@ -37,6 +37,7 @@ function Chart({data}:{data: any}) {
       type="monotone"
       dataKey="price"
       stroke="#00d5c8"
+      strokeWidth={2}
       dot={false}
       fill="url(#colorPrice)"
       />

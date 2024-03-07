@@ -15,8 +15,8 @@ function PriceChart() {
     return {time:formattedTime, price:BTC.h[idx] }
   });
   return (
-    <div className="flex flex-col md:flex-row justify-evenly">
-      <div className="flex flex-row md:flex-col justify-evenly">
+    <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
         <LinkButton to='/' buttonText='BTC' primaryColor={true}/>
         <LinkButton to='/' buttonText='ETH' primaryColor={true}/>
         <LinkButton to='/' buttonText='ARB' primaryColor={true}/>
