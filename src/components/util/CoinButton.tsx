@@ -7,9 +7,11 @@ function CoinButton({to, buttonText}:{to:string, buttonText:string}) {
     hover:w-full hover:bg-inherit hover:border-black hover:border-2 duration-300`}
     to={to}
     >
-      <div>
-          <div>
-              
+      <div className="flex flex-row justify-evenly items-center">
+          <img className="w-10 h-10 relative overflow-hidden rounded-full" src="/image/BTC.png"/>
+          <div className="flex flex-col">
+              <div>{buttonText}</div>
+              <div>67080.5</div>
           </div>
       </div>
   </Link>

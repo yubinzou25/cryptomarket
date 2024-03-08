@@ -16,9 +16,9 @@ function PriceChart() {
   return (
     <div className="flex flex-col md:flex-row justify-between">
       <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
-        <CoinButton to='/' buttonText='BTC'/>
-        <CoinButton to='/' buttonText='ETH'/>
-        <CoinButton to='/' buttonText='ARB'/>
+        <CoinButton to='/' buttonText='BTC/USDT'/>
+        <CoinButton to='/' buttonText='ETH/USDT'/>
+        <CoinButton to='/' buttonText='ARB/USDT'/>
       </div>
       <Chart data={priceData}/>
     </div>
