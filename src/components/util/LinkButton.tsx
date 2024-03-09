@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
 function LinkButton({to, buttonText, primaryColor}:{to:string, buttonText:string, primaryColor:boolean}) {
   return (

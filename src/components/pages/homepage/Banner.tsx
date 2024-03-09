@@ -1,4 +1,3 @@
-import React from 'react'
 import RotateText from './RotateText'
 import { Link } from 'react-router-dom'
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import ScrollCard from './ScrollCard';
 import Banner from './Banner';
 import ProductInfo from './ProductInfo';
