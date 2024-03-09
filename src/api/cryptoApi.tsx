@@ -9,13 +9,16 @@ export const cryptoApi = createApi({
     reducerPath:'cryptoApi',
     baseQuery:fetchBaseQuery({baseUrl:import.meta.env.VITE_APP_CRYPTO_API_URL, headers:cryptoApiHeaders}),
     endpoints: (builder) => ({
-        getCrypto: builder.query({
+        getCoins: builder.query({
             query: (count) => `/coins?limit=${count}`,
         }),
-        getCryptoDetails: builder.query({
+        getCoinDetail: builder.query({
             query: (coinId) => `/coin/${coinId}`,
+        }),
+        getCoinPriceHistory: builder.query({
+            query: (coinId) => `/coin/${coinId}/history?timePeriod=24h`,
         })
     })
 });
 
-export const {useGetCryptoQuery, useGetCryptoDetailsQuery} = cryptoApi;
+export const {useGetCoinsQuery,useGetCoinDetailQuery, useGetCoinPriceHistoryQuery} = cryptoApi;
