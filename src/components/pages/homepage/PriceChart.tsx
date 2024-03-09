@@ -1,10 +1,13 @@
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useGetCoinsQuery, useGetCoinDetailQuery, useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
 import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 function PriceChart() {
-  const {data:priceData} = useGetCoinPriceHistoryQuery('Qwsogvtv82FCd');
+  const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
+  const {data: coins} = useGetCoinsQuery(3);
+  console.log(coins);
+  const {data:priceData} = useGetCoinPriceHistoryQuery(requestUUID);
 
   const priceHistory = useMemo(() => {
     const history =  priceData?.data?.history || [];
@@ -21,9 +24,9 @@ function PriceChart() {
   return (
     <div className="flex flex-col md:flex-row justify-between">
       <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
-        <CoinButton to='/' buttonText='BTC/USDT'/>
-        <CoinButton to='/' buttonText='ETH/USDT'/>
-        <CoinButton to='/' buttonText='ARB/USDT'/>
+        <CoinButton name='BTC/USDT' uuid="Qwsogvtv82FCd" setRequestUUID={setRequestUUID}/>
+        <CoinButton name='ETH/USDT' uuid="razxDUgYGNAdQ" setRequestUUID={setRequestUUID}/>
+        <CoinButton name='ARB/USDT' uuid="HIVsRcGKkPFtW" setRequestUUID={setRequestUUID}/>
       </div>
       <Chart data={priceHistory}/>
     </div>
