@@ -5,30 +5,44 @@ import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 function PriceChart() {
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
+  const [requestPeriod, setRequestPeriod] = useState('24h');
   // const {data: coinsData} = useGetCoinsQuery(4);
-  const {data:priceData} = useGetCoinPriceHistoryQuery(requestUUID);
+  const {data:priceData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
   const priceHistory = useMemo(() => {
     const history =  priceData?.data?.history || [];
     return history.map((val:any, _index:any) => {
-      const formattedTime = new Intl.DateTimeFormat('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: false,
-      }).format(new Date(val.timestamp * 1000));
-      return {price:val.price, time: formattedTime}
-    })
-  }, [priceData]) 
+      const date = new Date(val.timestamp * 1000);
+      if(requestPeriod === '24h'){
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return {price:val.price, time: `${hours}:${minutes}`};
+      }else{
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return {price:val.price, time: `${month}-${day}`};
+      }
+    });
+  }, [priceData]);
+  const handleButtonClick = (period:string) => {
+    setRequestPeriod(period);
+  };
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-end">
       <div className="inline-flex rounded-lg">
-        <button className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        <button
+        onClick={() => handleButtonClick('24h')}
+        className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
           1D
         </button>
-        <button className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        <button 
+        onClick={() => handleButtonClick('7d')}
+        className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
           7D
         </button>
-        <button className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        <button
+        onClick={() => handleButtonClick('30d')}
+        className="py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg text-sm font-medium focus:z-10 border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
           30D
         </button>
       </div>
