@@ -14,10 +14,10 @@ function CoinButton({name, uuid, iconUrl, requestUUID, setRequestUUID}:{name:str
   const [isHovered, setIsHovered] = useState(false);
   return (
     <button 
-    className={`font-medium rounded-full px-4 py-2 whitespace-nowrap 
+    className={`font-medium rounded-full px-4 py-2 whitespace-nowrap w-4/5 border-2 border-gray-200 shadow-sm
     ${isHovered || uuid === requestUUID? 
-    "w-full bg-gray-100":
-    "w-4/5 bg-inherit border-2 border-gray-200 shadow-sm"} duration-300`}
+    "bg-gray-100":
+    "bg-white"}`}
     onClick={handleButtonClick}
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
