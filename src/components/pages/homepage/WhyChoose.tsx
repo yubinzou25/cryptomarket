@@ -7,22 +7,22 @@ function WhyChoose() {
             Why Choose DigiFinex
         </div>
         <div className="flex flex-row">
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            <Card iconUrl="image/safety.svg"/>
+            <Card iconUrl="image/service.svg"/>
+            <Card iconUrl="image/simplicity.svg"/>
+            <Card iconUrl="image/smile.svg"/>
         </div>
     </div>
   )
 }
-function Card(){
+function Card({iconUrl}:{iconUrl:string}){
     return (
         <div className="flex flex-row w-1/4 space-x-5">
             <div>
                 <div
                     className="bg-cover bg-center"
                     style={{
-                        backgroundImage: `url("/image/safety.svg")`,
+                        backgroundImage: `url("${iconUrl}")`,
                         width: "20px",
                         height: "20px",
                     }}
