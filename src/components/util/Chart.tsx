@@ -22,15 +22,17 @@ function Chart({data}:{data: any}) {
       <XAxis dataKey="time"
         axisLine={false}
         tickLine={false}
+        interval="preserveStart"
         minTickGap={100}
-        padding={{left:50, right:50}}
+        reversed={true}
+        padding={{right:50}}
         />
       <YAxis dataKey="price"
         axisLine={false}
         tickLine={false}
         orientation="right"
         padding={{top:50, bottom:50}}
-        domain={['auto', 'auto']}
+        domain={['auto','auto']}
         />
       <Tooltip />
       <Area

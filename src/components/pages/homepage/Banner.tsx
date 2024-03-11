@@ -17,7 +17,7 @@ function Banner() {
               itemList={[
                   {text:"BTC", color:"#ffc107"}, 
                   {text:"ETH", color:"#bc4fd5"}, 
-                  {text:"USDT", color:"#75d1b2"}
+                  {text:"BNB", color:"#75d1b2"}
               ]}
               letterNum = {3}
             />
