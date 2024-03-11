@@ -18,7 +18,7 @@ function ProductInfo() {
         {
             path:'/',
             header:'Launchpad',
-            main:'DigiFinex Launchpad provides users worldwide with a low-cost opportunity to invest early in project tokens. exclusively for DigiFinex Users.',
+            main:'provides users worldwide with a low-cost opportunity to invest early.',
             img:'/image/product_03.svg'
         },
         {
@@ -88,8 +88,7 @@ function FloatingCard({linkPath, headText, mainText, imgPath}:
                             width: "200px",
                             height: "200px",
                         }}
-                        >
-                    </div>
+                        />
                     </div>
                 </div>
             </Link>
