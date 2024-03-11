@@ -1,18 +1,22 @@
 
 import { useMemo, useState } from 'react';
-import { useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
+import { useGetCoinPriceHistoryQuery, useGetCoinsQuery } from '../../../api/cryptoApi';
 import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 function PriceChart() {
+  // const coins = useGetCoinsQuery(5);
+  // console.log(coins);
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
   const [requestPeriod, setRequestPeriod] = useState('24h');
   const {data:priceData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
   const priceHistory = useMemo(() => {
     if(!priceData?.data?.history){return [];}
     const history = priceData?.data?.history;
+    const rate = Math.floor(history.length / 100);
+    console.log(rate);
     return history.reduce((result:any, value:any, index:any) => {
       // Used to adjust sample rate in the future 
-      if (index % 1 === 0) {
+      if (index % rate === 0) {
         const date = new Date(value.timestamp * 1000);
         const price = parseFloat(value.price);
         const hours = date.getHours().toString().padStart(2, '0');
@@ -51,10 +55,16 @@ function PriceChart() {
       </div>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
-          <CoinButton name='BTC' requestUUID={requestUUID} uuid="Qwsogvtv82FCd" setRequestUUID={setRequestUUID}/>
-          <CoinButton name='ETH' requestUUID={requestUUID} uuid="razxDUgYGNAdQ" setRequestUUID={setRequestUUID}/>
-          <CoinButton name='BNB' requestUUID={requestUUID} uuid="WcwrkfNI4FUAe" setRequestUUID={setRequestUUID}/>
-          <CoinButton name='SOL' requestUUID={requestUUID} uuid="zNZHO_Sjf" setRequestUUID={setRequestUUID}/>
+        {/* 
+        https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg
+            https://cdn.coinranking.com/rk4RKHOuW/eth.svg 
+            https://cdn.coinranking.com/B1N19L_dZ/bnb.svg
+            https://cdn.coinranking.com/yvUG4Qex5/solana.svg
+        */}
+          <CoinButton name='BTC' requestUUID={requestUUID} uuid="Qwsogvtv82FCd" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg"/>
+          <CoinButton name='ETH' requestUUID={requestUUID} uuid="razxDUgYGNAdQ" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/rk4RKHOuW/eth.svg"/>
+          <CoinButton name='BNB' requestUUID={requestUUID} uuid="WcwrkfNI4FUAe" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/B1N19L_dZ/bnb.svg"/>
+          <CoinButton name='SOL' requestUUID={requestUUID} uuid="zNZHO_Sjf" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/yvUG4Qex5/solana.svg"/>
         </div>
         <Chart data={priceHistory}/>
       </div>
