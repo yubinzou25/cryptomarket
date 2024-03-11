@@ -32,7 +32,7 @@ function Chart({data}:{data: any}) {
         tickLine={false}
         orientation="right"
         padding={{top:50, bottom:50}}
-        domain={['auto', 'auto']}
+        domain={['auto','auto']}
         />
       <Tooltip />
       <Area
