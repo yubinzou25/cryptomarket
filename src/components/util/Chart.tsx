@@ -1,6 +1,6 @@
 
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
-function Chart({data}:{data: any}) {
+function Chart({data, yAxisKey}:{data: any, yAxisKey:string}) {
   return (
     <ResponsiveContainer width={"100%"} height={600}>
       <AreaChart data={data}
@@ -19,7 +19,7 @@ function Chart({data}:{data: any}) {
             />
           </linearGradient>
         </defs>
-      <XAxis dataKey="time"
+      <XAxis dataKey={yAxisKey}
         axisLine={false}
         tickLine={false}
         interval="preserveStart"
