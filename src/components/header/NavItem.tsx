@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 type NavItem = {
     title:string,
@@ -29,18 +30,20 @@ function NavItem({item}:{item:NavItem}) {
             <div
                 className="flex items-center gap-1 w-full lg:w-auto lg:px-3 py-2 text-gray-600 hover:text-gray-900"
                 >
-                <span>{item.title}</span>
-                <DropDownIcon
+                <Link to={item.path}>{item.title}</Link>
+                { item.children &&
+                    <DropDownIcon
                     toggle={isHovered}
-                />
-            </div>
-            {/* ${!isHovered && 'hidden'} */}
-            { item.children &&
-                <DropDown
-                    toggle={isHovered}
-                    dropDownItem={item.children}
                     />
-            }
+                }
+                
+            </div>
+                { item.children &&
+                    <DropDown
+                        toggle={isHovered}
+                        dropDownItem={item.children}
+                        />
+                }
     </div>
   )
 }
@@ -54,13 +57,13 @@ function DropDown({toggle, dropDownItem}:{toggle:boolean, dropDownItem:DropDownI
                     className="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
                     {
                     dropDownItem.map((item, index) => (
-                        <a
-                        href={item.path}
+                        <Link
+                        to={item.path}
                         className="py-1 text-gray-600 hover:text-gray-900"
                         key={index}
                         >
                         {item.title}
-                        </a>
+                        </Link>
                     ))
                     }
                 </div>

@@ -15,13 +15,7 @@ function NavBar(){
         },
         {
           title: 'Market',
-          path: '/market',
-          children: [
-            { title: "Action", path: "/" },
-            { title: "Another action", path: "#" },
-            { title: "Dropdown Submenu", path: "#" },
-            { title: "404 Page", path: "/404" },
-          ],
+          path: '/market'
         },
         {
           title: 'Trade',
