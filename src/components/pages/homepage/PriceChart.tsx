@@ -66,7 +66,7 @@ function PriceChart() {
           <CoinButton name='BNB' requestUUID={requestUUID} uuid="WcwrkfNI4FUAe" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/B1N19L_dZ/bnb.svg"/>
           <CoinButton name='SOL' requestUUID={requestUUID} uuid="zNZHO_Sjf" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/yvUG4Qex5/solana.svg"/>
         </div>
-        <Chart data={priceHistory}/>
+        <Chart data={priceHistory} yAxisKey={requestPeriod === '24h'? 'time':'date'}/>
       </div>
     </div>
   )
