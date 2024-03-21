@@ -1,6 +1,5 @@
 import LinkButton from '../../util/LinkButton'
 import RotateText from './RotateText'
-import { Link } from 'react-router-dom'
 
 function Banner() {
   return (
@@ -31,7 +30,7 @@ function Banner() {
           create any website with this starter.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
-        <LinkButton to="/" buttonText="GitHub Repo" primaryColor={true}/>
+        <LinkButton to="https://github.com/yubinzou25/cryptomarket" buttonText="GitHub Repo" primaryColor={false}/>
         </div>
       </div>
     </main>
