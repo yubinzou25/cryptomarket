@@ -19,19 +19,19 @@ function NavBar(){
         },
         {
           title: 'Trade',
-          path: "/trade",
+          path: "/",
         },
         {
           title: "Derivatives",
-          path: "/derivatives",
+          path: "/",
         },
         {
           title: "Wealth",
-          path: "/wealth",
+          path: "/",
         },
         {
           title: "Pro Version",
-          path: "https://astroship-pro.web3templates.com/",
+          path: "/",
         },
       ];
     return (
