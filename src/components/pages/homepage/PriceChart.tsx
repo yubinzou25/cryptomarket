@@ -1,6 +1,6 @@
 
 import { useMemo, useState } from 'react';
-import { useGetCoinPriceHistoryQuery, useGetCoinsQuery } from '../../../api/cryptoApi';
+import { useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
 import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 function PriceChart() {
