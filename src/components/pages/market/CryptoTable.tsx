@@ -8,16 +8,17 @@ function CryptoTable() {
     if(!coinRawData?.data?.coins){return [];}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return coinRawData.data.coins.map((item:any) => {
-      const price = parseFloat(item['price']).toLocaleString('en-US', { 
+      const price = parseFloat(item.price).toLocaleString('en-US', { 
         maximumFractionDigits: 5
       });
       const volume = parseFloat(item['24hVolume']).toLocaleString('en-US');
-      const marketCap = parseFloat(item['marketCap']).toLocaleString('en-US');
-      const change = parseFloat(item['change']);
+      const marketCap = parseFloat(item.marketCap).toLocaleString('en-US');
+      const change = parseFloat(item.change);
       return {
-        name: item['name'],
-        symbol: item['symbol'],
-        iconUrl: item['iconUrl'],
+        rank:item.rank,
+        name: item.name,
+        symbol: item.symbol,
+        iconUrl: item.iconUrl,
         change: change,
         price: price,
         volume: volume,
@@ -30,6 +31,12 @@ function CryptoTable() {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
+                    <th scope="col" className="px-6 py-3 cursor-pointer">
+                        <div className="flex items-center">
+                            #
+                            <TableSortIcon/>
+                        </div>
+                    </th>
                     <th scope="col" className="px-6 py-3" >
                         Symbols
                     </th>
@@ -57,17 +64,15 @@ function CryptoTable() {
                             <TableSortIcon/>
                         </div>
                     </th>
-                    <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
-                            Last 24H Price
-                        </div>
-                    </th>
                 </tr>
             </thead>
             <tbody>
               {// eslint-disable-next-line @typescript-eslint/no-explicit-any
               coinData.map((item:any, index:any) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td className="px-6 py-4 font-bold">
+                    {item.rank}
+                  </td>
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <div className="flex flex-row space-x-1 content-center">
                       <img className={"w-5 h-5 relative overflow-hidden rounded-full"} src={item.iconUrl}/>
