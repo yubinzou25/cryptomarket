@@ -3,7 +3,9 @@ import CryptoTable from './CryptoTable'
 
 function Market() {
   return (
-    <CryptoTable/>
+    <div className="flex flex-col mt-20 mb-20">
+      <CryptoTable/>
+    </div>
   )
 }
 

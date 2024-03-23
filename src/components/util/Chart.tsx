@@ -1,5 +1,6 @@
 
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Chart({data, yAxisKey}:{data: any, yAxisKey:string}) {
   return (
     <ResponsiveContainer width={"100%"} height={600}>

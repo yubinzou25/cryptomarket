@@ -12,7 +12,6 @@ function PriceChart() {
     if(!priceData?.data?.history){return [];}
     const history = priceData?.data?.history;
     const rate = Math.floor(history.length / 100);
-    console.log(rate);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return history.reduce((result:any, value:any, index:any) => {
       // Used to adjust sample rate in the future 
