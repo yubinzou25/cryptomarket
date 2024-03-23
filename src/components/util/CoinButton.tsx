@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CoinButton({name, uuid, iconUrl, requestUUID, setRequestUUID}:{name:string, uuid:string, iconUrl:string, requestUUID:string, setRequestUUID: (uuid:string) => void}) {
+function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequestUUID}:{name:string, uuid:string, iconUrl:string, change:number, price:number, requestUUID:string, setRequestUUID: (uuid:string) => void}) {
   const handleButtonClick = () => {
     setRequestUUID(uuid);
   };
@@ -14,7 +14,7 @@ function CoinButton({name, uuid, iconUrl, requestUUID, setRequestUUID}:{name:str
   const [isHovered, setIsHovered] = useState(false);
   return (
     <button 
-    className={`font-medium rounded-full px-4 py-2 whitespace-nowrap w-4/5 border-2 border-gray-200 shadow-sm
+    className={`font-medium rounded-full px-2 py-2 whitespace-nowrap w-4/5 border-2 border-gray-200 shadow-sm
     ${isHovered || uuid === requestUUID? 
     "bg-gray-100":
     "bg-white"}`}
@@ -22,10 +22,21 @@ function CoinButton({name, uuid, iconUrl, requestUUID, setRequestUUID}:{name:str
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
     >
-      <div className="flex flex-row justify-evenly items-center">
-          <img className="w-10 h-10 relative overflow-hidden rounded-full" src={iconUrl}/>
+      <div className="flex flex-row justify-evenly items-center space-x-5">
+          <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={iconUrl}/>
           <div className="flex flex-col">
-              <div>{name}</div>
+              <span className="font-bold">{name}</span>
+              <div className="flex flex-row content-center space-x-2">
+                <span className="text-gray-500">
+                  {price.toLocaleString('en-US', { 
+                    maximumFractionDigits: 1
+                  })}
+                </span>
+                <span className={`${change > 0? 'text-green-500': 'text-red-500'}`}>
+                  {change > 0 && '+'}{change}%
+                </span>
+              </div>
+              
           </div>
       </div>
   </button>

@@ -1,5 +1,6 @@
 
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Chart({data, yAxisKey}:{data: any, yAxisKey:string}) {
   return (
     <ResponsiveContainer width={"100%"} height={600}>
@@ -37,6 +38,7 @@ function Chart({data, yAxisKey}:{data: any, yAxisKey:string}) {
       <Tooltip />
       <Area
       type="monotone"
+      animationDuration = {500}
       dataKey="price"
       stroke="#00d5c8"
       strokeWidth={2}

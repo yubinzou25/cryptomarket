@@ -1,19 +1,40 @@
 
 import { useMemo, useState } from 'react';
-import { useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
+import { useGetCoinPriceHistoryQuery, useGetCoinsQuery } from '../../../api/cryptoApi';
 import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
+type coinButtonData = {
+  uuid: string,
+  symbol: string,
+  iconUrl: string,
+  change: number,
+  price: number
+}
 function PriceChart() {
-  // const coins = useGetCoinsQuery(5);
-  // console.log(coins);
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
   const [requestPeriod, setRequestPeriod] = useState('24h');
-  const {data:priceData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
+  const {data:coinRawData} = useGetCoinsQuery(5);
+  const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
+  const coinData:coinButtonData[] = useMemo(() => {
+    if(!coinRawData?.data?.coins){return [];}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return coinRawData.data.coins.map((item:any) => {
+      const price = parseFloat(item.price)
+      const change = parseFloat(item.change);
+      return {
+        uuid: item.uuid,
+        symbol: item.symbol,
+        iconUrl: item.iconUrl,
+        change: change,
+        price: price,
+      }
+    })
+  }, [coinRawData]);
   const priceHistory = useMemo(() => {
-    if(!priceData?.data?.history){return [];}
-    const history = priceData?.data?.history;
+    if(!priceRawData?.data?.history){return [];}
+    const history = priceRawData?.data?.history;
     const rate = Math.floor(history.length / 100);
-    console.log(rate);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return history.reduce((result:any, value:any, index:any) => {
       // Used to adjust sample rate in the future 
       if (index % rate === 0) {
@@ -27,7 +48,7 @@ function PriceChart() {
       }
       return result;
     }, []);
-  }, [priceData]);
+  }, [priceRawData]);
   const handleButtonClick = (period:string) => {
     setRequestPeriod(period);
   };
@@ -55,16 +76,18 @@ function PriceChart() {
       </div>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
-        {/* 
-        https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg
-            https://cdn.coinranking.com/rk4RKHOuW/eth.svg 
-            https://cdn.coinranking.com/B1N19L_dZ/bnb.svg
-            https://cdn.coinranking.com/yvUG4Qex5/solana.svg
-        */}
-          <CoinButton name='BTC' requestUUID={requestUUID} uuid="Qwsogvtv82FCd" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg"/>
-          <CoinButton name='ETH' requestUUID={requestUUID} uuid="razxDUgYGNAdQ" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/rk4RKHOuW/eth.svg"/>
-          <CoinButton name='BNB' requestUUID={requestUUID} uuid="WcwrkfNI4FUAe" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/B1N19L_dZ/bnb.svg"/>
-          <CoinButton name='SOL' requestUUID={requestUUID} uuid="zNZHO_Sjf" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/yvUG4Qex5/solana.svg"/>
+          {coinData.map((item, index) => (
+             <CoinButton 
+              key={index}
+              name={item.symbol}
+              uuid={item.uuid}
+              change={item.change}
+              price={item.price}
+              iconUrl={item.iconUrl}
+              requestUUID={requestUUID}
+              setRequestUUID={setRequestUUID}
+             />
+          ))}
         </div>
         <Chart data={priceHistory} yAxisKey={requestPeriod === '24h'? 'time':'date'}/>
       </div>
