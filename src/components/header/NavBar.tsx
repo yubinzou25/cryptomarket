@@ -3,23 +3,18 @@ import NavItem from './NavItem';
 function NavBar(){
     const menuitems = [
         {
-          title: 'Buy Crypto',
-          path: '/buycrypto',
-          children: [
-            { title: "Action", path: "/" },
-            { title: "Another action", path: "#" },
-            { title: "Dropdown Submenu", path: "#" },
-            { title: "404 Page", path: "/404" },
-
-          ],
-        },
-        {
           title: 'Market',
           path: '/market'
         },
         {
           title: 'Trade',
           path: "/",
+          children: [
+            { title: "Spot", path: "/" },
+            { title: "Margin (Leveraged)", path: "/" },
+            { title: "ETF", path: "/" },
+
+          ],
         },
         {
           title: "Derivatives",
