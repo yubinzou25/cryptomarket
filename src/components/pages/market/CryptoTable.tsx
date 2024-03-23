@@ -1,16 +1,22 @@
+import { useMemo } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
 
 function CryptoTable() {
 
   const {data:coinRawData} = useGetCoinsQuery(10);
-  console.log(coinRawData);
-  // const coinData = useMemo(() => {
-  //   if(!coinRawData?.data?.coins){return [];}
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   return coinRawData.data.coins.map((item) => {
-  //     return {name: item.symbol}
-  //   })
-  // }, [coinRawData]);
+  const coinData = useMemo(() => {
+    if(!coinRawData?.data?.coins){return [];}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return coinRawData.data.coins.map((item:any) => {
+      return {
+        symbol: item['symbol'],
+        price: item['price'],
+        change: item['change'],
+        volume: item['24hVolume'],
+        marketCap: item['marketCap']
+      }
+    })
+  }, [coinRawData]);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -47,7 +53,7 @@ function CryptoTable() {
             </thead>
             <tbody>
               {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-              coinRawData.data.coins.map((item:any, index:any) => (
+              coinData.map((item:any, index:any) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {item.symbol}
@@ -59,10 +65,10 @@ function CryptoTable() {
                     {item.change}
                   </td>
                   <td className="px-6 py-4">
-                    {item['24hVolume']}
+                    {item.volume}
                   </td>
                   <td className="px-6 py-4">
-                    {item['marketCap']}
+                    {item.marketCap}
                   </td>
                 </tr>
               ))}
