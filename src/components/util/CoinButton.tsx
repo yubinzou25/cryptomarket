@@ -23,7 +23,7 @@ function CoinButton({name, uuid, iconUrl, requestUUID, setRequestUUID}:{name:str
     onMouseLeave={handleMouseLeave}
     >
       <div className="flex flex-row justify-evenly items-center">
-          <img className="w-10 h-10 relative overflow-hidden rounded-full" src={iconUrl}/>
+          <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={iconUrl}/>
           <div className="flex flex-col">
               <div>{name}</div>
           </div>

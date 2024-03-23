@@ -54,12 +54,6 @@ function PriceChart() {
       </div>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
-        {/* 
-        https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg
-            https://cdn.coinranking.com/rk4RKHOuW/eth.svg 
-            https://cdn.coinranking.com/B1N19L_dZ/bnb.svg
-            https://cdn.coinranking.com/yvUG4Qex5/solana.svg
-        */}
           <CoinButton name='BTC' requestUUID={requestUUID} uuid="Qwsogvtv82FCd" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg"/>
           <CoinButton name='ETH' requestUUID={requestUUID} uuid="razxDUgYGNAdQ" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/rk4RKHOuW/eth.svg"/>
           <CoinButton name='BNB' requestUUID={requestUUID} uuid="WcwrkfNI4FUAe" setRequestUUID={setRequestUUID} iconUrl="https://cdn.coinranking.com/B1N19L_dZ/bnb.svg"/>
