@@ -24,9 +24,9 @@ function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequest
     >
       <div className="flex flex-row justify-evenly items-center space-x-5">
           <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={iconUrl}/>
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-1/2 hidden md:block">
               <span className="font-bold">{name}</span>
-              <div className="flex flex-row content-center justify-evenly space-x-3">
+              <div className="flex flex-row content-center justify-evenly space-x-3 hidden xl:block">
                 <span className="text-gray-500">
                   {price.toLocaleString('en-US', { 
                     maximumFractionDigits: 3
