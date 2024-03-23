@@ -1,18 +1,27 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
 
+type tableData = {
+  rank:number,
+  name:string,
+  symbol:string,
+  iconUrl:string,
+  change:number,
+  price:number,
+  volume:number,
+  marketCap:number
+}
 function CryptoTable() {
-
+  const [sortedData, setSortedData] = useState([]);
+  const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
   const {data:coinRawData} = useGetCoinsQuery(30);
-  const coinData = useMemo(() => {
-    if(!coinRawData?.data?.coins){return [];}
+  useMemo(() => {
+    if(!coinRawData?.data?.coins){return;}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return coinRawData.data.coins.map((item:any) => {
-      const price = parseFloat(item.price).toLocaleString('en-US', { 
-        maximumFractionDigits: 5
-      });
-      const volume = parseFloat(item['24hVolume']).toLocaleString('en-US');
-      const marketCap = parseFloat(item.marketCap).toLocaleString('en-US');
+    const coinData = coinRawData.data.coins.map((item:any) => {
+      const price = parseFloat(item.price);
+      const volume = parseFloat(item['24hVolume']);
+      const marketCap = parseFloat(item.marketCap);
       const change = parseFloat(item.change);
       return {
         rank:item.rank,
@@ -24,42 +33,58 @@ function CryptoTable() {
         volume: volume,
         marketCap: marketCap
       }
-    })
+    });
+    // By default the table is sorted by rank#
+    setSortedData(coinData);
+    setSortOrder(false);
   }, [coinRawData]);
+
+  const handleSort = (key:string) => {
+    const preSortedData = [...sortedData];
+    if (sortOrder) {
+      preSortedData.sort((a, b) => (a[key] > b[key] ? 1 : -1));
+      setSortOrder(false);
+    } else {
+      preSortedData.sort((a, b) => (a[key] < b[key] ? 1 : -1));
+      setSortOrder(true);
+    }
+    setSortedData(preSortedData);
+  };
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
-                            #
-                            <TableSortIcon/>
-                        </div>
+                    <th scope="col"className="px-6 py-3 cursor-pointer">
+                      <div className="flex items-center" onClick={() => handleSort('rank')}>
+                          #
+                          <TableSortIcon/>
+                      </div>
                     </th>
-                    <th scope="col" className="px-6 py-3" >
+                    <th scope="col" className="px-6 py-3">
                         Symbols
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('price')}>
                             Latest Price
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('change')}>
                             24H Change
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('volume')}>
                             24H Volume
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('marketCap')}>
                             Market Cap
                             <TableSortIcon/>
                         </div>
@@ -67,8 +92,8 @@ function CryptoTable() {
                 </tr>
             </thead>
             <tbody>
-              {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-              coinData.map((item:any, index:any) => (
+              {
+              sortedData.map((item:tableData, index:number) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td className="px-6 py-4 font-bold">
                     {item.rank}
@@ -81,16 +106,18 @@ function CryptoTable() {
                     </div>
                   </th>
                   <td className="px-6 py-4 font-bold">
-                    ${item.price}
+                    ${item.price.toLocaleString('en-US', { 
+                      maximumFractionDigits: 5
+                    })}
                   </td>
                   <td className={`px-6 py-4 ${item.change > 0? 'text-green-500': 'text-red-500'}`}>
-                    {item.change > 0 && '+'}{item.change}%
+                    {item.change > 0 && '+'}{item.change.toLocaleString('en-US')}%
                   </td>
                   <td className="px-6 py-4">
-                    ${item.volume}
+                    ${item.volume.toLocaleString('en-US')}
                   </td>
                   <td className="px-6 py-4">
-                    ${item.marketCap}
+                    ${item.marketCap.toLocaleString('en-US')}
                   </td>
                 </tr>
               ))}
