@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import NavBar from './NavBar';
 import LinkButton from '../util/LinkButton';
 
 function Header() {
+    const location = useLocation();
     return (
         <header className="flex flex-col lg:flex-row justify-between items-center my-5">
             <div className="flex flex-row w-full justify-between items-start">
@@ -14,11 +15,13 @@ function Header() {
                         <NavBar/>
                     </div>
                     {/* right side header contains menu and Login/SignUp Button*/}
-                    <div className="flex flex-row items-center gap-4">
-                        <LinkButton to="/" buttonText="Log in" primaryColor={false}/>
-                        <LinkButton to="/" buttonText="Sign up" primaryColor={true}/>
-                        <MenuButton/>
-                    </div>
+                    {location.pathname !== "/login" && location.pathname !== "/signup" &&
+                        <div className="flex flex-row items-center gap-4">
+                            <LinkButton to="/login" buttonText="Log in" primaryColor={false}/>
+                            <LinkButton to="/signup" buttonText="Sign up" primaryColor={true}/>
+                            <MenuButton/>
+                        </div>
+                    }
                 </div>
                 
                 

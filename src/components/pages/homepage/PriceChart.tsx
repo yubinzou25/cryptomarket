@@ -4,8 +4,7 @@ import { useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
 import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 function PriceChart() {
-  // const coins = useGetCoinsQuery(5);
-  // console.log(coins);
+
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
   const [requestPeriod, setRequestPeriod] = useState('24h');
   const {data:priceData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
