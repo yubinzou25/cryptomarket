@@ -1,23 +1,27 @@
 import { useMemo } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
 
-
 function CryptoTable() {
 
-  const {data:coinRawData} = useGetCoinsQuery(10);
-  console.log(coinRawData);
+  const {data:coinRawData} = useGetCoinsQuery(30);
   const coinData = useMemo(() => {
     if(!coinRawData?.data?.coins){return [];}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return coinRawData.data.coins.map((item:any) => {
+      const price = parseFloat(item['price']).toLocaleString('en-US', { 
+        maximumFractionDigits: 5
+      });
+      const volume = parseFloat(item['24hVolume']).toLocaleString('en-US');
+      const marketCap = parseFloat(item['marketCap']).toLocaleString('en-US');
+      const change = parseFloat(item['change']);
       return {
         name: item['name'],
         symbol: item['symbol'],
-        price: item['price'],
-        change: item['change'],
-        volume: item['24hVolume'],
-        marketCap: item['marketCap'],
-        iconUrl: item['iconUrl']
+        iconUrl: item['iconUrl'],
+        change: change,
+        price: price,
+        volume: volume,
+        marketCap: marketCap
       }
     })
   }, [coinRawData]);
@@ -53,6 +57,11 @@ function CryptoTable() {
                             <TableSortIcon/>
                         </div>
                     </th>
+                    <th scope="col" className="px-6 py-3 cursor-pointer">
+                        <div className="flex items-center">
+                            Last 24H Price
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -66,17 +75,17 @@ function CryptoTable() {
                       <span className="text-gray-400">/ {item.symbol}</span>
                     </div>
                   </th>
-                  <td className="px-6 py-4">
-                    {item.price}
+                  <td className="px-6 py-4 font-bold">
+                    ${item.price}
+                  </td>
+                  <td className={`px-6 py-4 ${item.change > 0? 'text-green-500': 'text-red-500'}`}>
+                    {item.change > 0 && '+'}{item.change}%
                   </td>
                   <td className="px-6 py-4">
-                    {item.change}
+                    ${item.volume}
                   </td>
                   <td className="px-6 py-4">
-                    {item.volume}
-                  </td>
-                  <td className="px-6 py-4">
-                    {item.marketCap}
+                    ${item.marketCap}
                   </td>
                 </tr>
               ))}
