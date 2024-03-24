@@ -1,19 +1,31 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
-
+import { Sparklines, SparklinesCurve } from 'react-sparklines';
+type tableData = {
+  rank:number,
+  name:string,
+  symbol:string,
+  iconUrl:string,
+  change:number,
+  price:number,
+  volume:number,
+  marketCap:number,
+  sparklines:number[]
+}
 function CryptoTable() {
-
-  const {data:coinRawData} = useGetCoinsQuery(30);
-  const coinData = useMemo(() => {
-    if(!coinRawData?.data?.coins){return [];}
+  const [sortedData, setSortedData] = useState([]);
+  const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
+  const [tablePage, setTablePage] = useState(0);
+  const {data:coinRawData} = useGetCoinsQuery({limit:30, offset:tablePage * 30});
+  useMemo(() => {
+    if(!coinRawData?.data?.coins){return;}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return coinRawData.data.coins.map((item:any) => {
-      const price = parseFloat(item.price).toLocaleString('en-US', { 
-        maximumFractionDigits: 5
-      });
-      const volume = parseFloat(item['24hVolume']).toLocaleString('en-US');
-      const marketCap = parseFloat(item.marketCap).toLocaleString('en-US');
+    const coinData = coinRawData.data.coins.map((item:any) => {
+      const price = parseFloat(item.price);
+      const volume = parseFloat(item['24hVolume']);
+      const marketCap = parseFloat(item.marketCap);
       const change = parseFloat(item.change);
+      const sparklines = item.sparkline.map((ele:string) => parseFloat(ele)).filter((ele:number) => !Number.isNaN(ele));
       return {
         rank:item.rank,
         name: item.name,
@@ -22,53 +34,79 @@ function CryptoTable() {
         change: change,
         price: price,
         volume: volume,
-        marketCap: marketCap
+        marketCap: marketCap,
+        sparklines: sparklines
       }
-    })
+    });
+    // By default the table is sorted by marketCap
+    setSortedData(coinData);
+    setSortOrder(false);
   }, [coinRawData]);
+
+  const handleSort = (key:string) => {
+    const preSortedData = [...sortedData];
+    if (sortOrder) {
+      preSortedData.sort((a, b) => (a[key] > b[key] ? 1 : -1));
+      setSortOrder(false);
+    } else {
+      preSortedData.sort((a, b) => (a[key] < b[key] ? 1 : -1));
+      setSortOrder(true);
+    }
+    setSortedData(preSortedData);
+  };
+
+  const handleSwitchPage = (page:number) => {
+    setTablePage(page);
+  }
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
-                            #
-                            <TableSortIcon/>
-                        </div>
+                    <th scope="col"className="px-6 py-3 cursor-pointer">
+                      <div className="flex items-center" onClick={() => handleSort('rank')}>
+                          #
+                          <TableSortIcon/>
+                      </div>
                     </th>
-                    <th scope="col" className="px-6 py-3" >
+                    <th scope="col" className="px-6 py-3">
                         Symbols
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('price')}>
                             Latest Price
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('change')}>
                             24H Change
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('volume')}>
                             24H Volume
                             <TableSortIcon/>
                         </div>
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
-                        <div className="flex items-center">
+                        <div className="flex items-center" onClick={() => handleSort('marketCap')}>
                             Market Cap
                             <TableSortIcon/>
+                        </div>
+                    </th>
+                    <th scope="col" className="px-6 py-3 cursor-pointer">
+                        <div className="flex items-center">
+                            24H Trend
                         </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-              {// eslint-disable-next-line @typescript-eslint/no-explicit-any
-              coinData.map((item:any, index:any) => (
+              {
+              sortedData.map((item:tableData, index:number) => (
                 <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td className="px-6 py-4 font-bold">
                     {item.rank}
@@ -81,21 +119,40 @@ function CryptoTable() {
                     </div>
                   </th>
                   <td className="px-6 py-4 font-bold">
-                    ${item.price}
+                    ${item.price.toLocaleString('en-US', { 
+                      maximumFractionDigits: 5
+                    })}
                   </td>
                   <td className={`px-6 py-4 ${item.change > 0? 'text-green-500': 'text-red-500'}`}>
-                    {item.change > 0 && '+'}{item.change}%
+                    {item.change > 0 && '+'}{item.change.toLocaleString('en-US')}%
                   </td>
                   <td className="px-6 py-4">
-                    ${item.volume}
+                    ${item.volume.toLocaleString('en-US')}
                   </td>
                   <td className="px-6 py-4">
-                    ${item.marketCap}
+                    ${item.marketCap.toLocaleString('en-US')}
+                  </td>
+                  <td className="">
+                    <Sparklines data={item.sparklines}>
+                      <SparklinesCurve color={item.change > 0? 'green': 'red'}/>
+                    </Sparklines>
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
+        <div className="flex flex-row space-x-2 justify-end m-3">
+        {
+          [0, 1, 2, 3, 4, 5].map((page:number) => (
+            <button key={page} className={`font-medium rounded-lg px-4 py-2 whitespace-nowrap border border-gray-400 \
+            ${page === tablePage && 'text-primary-default border-primary-default'}
+            hover:text-primary-default hover:border-primary-default`}
+            onClick={() => handleSwitchPage(page)}>
+              {page + 1}
+            </button>
+          ))
+        }
+        </div>
     </div>
   );
 }

@@ -10,7 +10,7 @@ export const cryptoApi = createApi({
     baseQuery:fetchBaseQuery({baseUrl:import.meta.env.VITE_APP_CRYPTO_API_URL, headers:cryptoApiHeaders}),
     endpoints: (builder) => ({
         getCoins: builder.query({
-            query: (count) => `/coins?limit=${count}`,
+            query: ({limit, offset}) => `/coins?limit=${limit}&offset=${offset}`,
         }),
         getCoinDetail: builder.query({
             query: (coinId) => `/coin/${coinId}`,

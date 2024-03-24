@@ -5,6 +5,7 @@ import Chart from '../../util/Chart';
 import CoinButton from '../../util/CoinButton';
 type coinButtonData = {
   uuid: string,
+  name:string,
   symbol: string,
   iconUrl: string,
   change: number,
@@ -13,7 +14,7 @@ type coinButtonData = {
 function PriceChart() {
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
   const [requestPeriod, setRequestPeriod] = useState('24h');
-  const {data:coinRawData} = useGetCoinsQuery(5);
+  const {data:coinRawData} = useGetCoinsQuery({limit:5, offset:0});
   const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
   const coinData:coinButtonData[] = useMemo(() => {
     if(!coinRawData?.data?.coins){return [];}
@@ -23,6 +24,7 @@ function PriceChart() {
       const change = parseFloat(item.change);
       return {
         uuid: item.uuid,
+        name: item.name,
         symbol: item.symbol,
         iconUrl: item.iconUrl,
         change: change,
@@ -74,12 +76,12 @@ function PriceChart() {
           30D
         </button>
       </div>
-      <div className="flex flex-col md:flex-row justify-between">
+      <div className="flex flex-col md:flex-row justify-between space-x-10">
         <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
           {coinData.map((item, index) => (
              <CoinButton 
               key={index}
-              name={item.symbol}
+              name={item.name}
               uuid={item.uuid}
               change={item.change}
               price={item.price}
