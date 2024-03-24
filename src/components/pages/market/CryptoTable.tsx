@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
-
+import { Sparklines, SparklinesCurve } from 'react-sparklines';
 type tableData = {
   rank:number,
   name:string,
@@ -12,6 +12,33 @@ type tableData = {
   marketCap:number
 }
 function CryptoTable() {
+  const sparkline =[
+    "65682.06875920478",
+    "65514.056334909634",
+    "65175.00711159383",
+    "64949.355417487066",
+    "64952.25749318017",
+    "64936.46862968409",
+    "64553.489828216785",
+    "64367.36162013466",
+    "64519.160265586426",
+    "64369.15604681559",
+    "64134.337741642776",
+    "64032.99185160309",
+    "64276.69367063113",
+    "64260.630369364895",
+    "64200.94308334599",
+    "64805.57500191802",
+    "65000.299707890284",
+    "65080.23231183342",
+    "65122.51697660709",
+    "65503.261082861274",
+    "65516.658458562124",
+    "65613.55700018752",
+    "65610.14258053622",
+    "65617.63275905565"
+];
+const sparklineNumbers = sparkline.map(item => parseFloat(item));
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
   const [tablePage, setTablePage] = useState(0);
@@ -94,6 +121,11 @@ function CryptoTable() {
                             <TableSortIcon/>
                         </div>
                     </th>
+                    <th scope="col" className="px-6 py-3 cursor-pointer">
+                        <div className="flex items-center">
+                            24H Price
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -123,6 +155,11 @@ function CryptoTable() {
                   </td>
                   <td className="px-6 py-4">
                     ${item.marketCap.toLocaleString('en-US')}
+                  </td>
+                  <td className="">
+                    <Sparklines data={sparklineNumbers}>
+                      <SparklinesCurve/>
+                    </Sparklines>
                   </td>
                 </tr>
               ))}
