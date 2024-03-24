@@ -9,36 +9,10 @@ type tableData = {
   change:number,
   price:number,
   volume:number,
-  marketCap:number
+  marketCap:number,
+  sparklines:number[]
 }
 function CryptoTable() {
-  const sparkline =[
-    "65682.06875920478",
-    "65514.056334909634",
-    "65175.00711159383",
-    "64949.355417487066",
-    "64952.25749318017",
-    "64936.46862968409",
-    "64553.489828216785",
-    "64367.36162013466",
-    "64519.160265586426",
-    "64369.15604681559",
-    "64134.337741642776",
-    "64032.99185160309",
-    "64276.69367063113",
-    "64260.630369364895",
-    "64200.94308334599",
-    "64805.57500191802",
-    "65000.299707890284",
-    "65080.23231183342",
-    "65122.51697660709",
-    "65503.261082861274",
-    "65516.658458562124",
-    "65613.55700018752",
-    "65610.14258053622",
-    "65617.63275905565"
-];
-const sparklineNumbers = sparkline.map(item => parseFloat(item));
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
   const [tablePage, setTablePage] = useState(0);
@@ -51,6 +25,7 @@ const sparklineNumbers = sparkline.map(item => parseFloat(item));
       const volume = parseFloat(item['24hVolume']);
       const marketCap = parseFloat(item.marketCap);
       const change = parseFloat(item.change);
+      const sparklines = item.sparkline.map((ele:string) => parseFloat(ele)).filter((ele:number) => !Number.isNaN(ele));
       return {
         rank:item.rank,
         name: item.name,
@@ -59,7 +34,8 @@ const sparklineNumbers = sparkline.map(item => parseFloat(item));
         change: change,
         price: price,
         volume: volume,
-        marketCap: marketCap
+        marketCap: marketCap,
+        sparklines: sparklines
       }
     });
     // By default the table is sorted by marketCap
@@ -123,7 +99,7 @@ const sparklineNumbers = sparkline.map(item => parseFloat(item));
                     </th>
                     <th scope="col" className="px-6 py-3 cursor-pointer">
                         <div className="flex items-center">
-                            24H Price
+                            24H Trend
                         </div>
                     </th>
                 </tr>
@@ -157,8 +133,8 @@ const sparklineNumbers = sparkline.map(item => parseFloat(item));
                     ${item.marketCap.toLocaleString('en-US')}
                   </td>
                   <td className="">
-                    <Sparklines data={sparklineNumbers}>
-                      <SparklinesCurve/>
+                    <Sparklines data={item.sparklines}>
+                      <SparklinesCurve color={item.change > 0? 'green': 'red'}/>
                     </Sparklines>
                   </td>
                 </tr>
