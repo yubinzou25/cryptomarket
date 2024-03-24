@@ -29,7 +29,7 @@ function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequest
               <div className="flex flex-row content-center justify-evenly space-x-3 hidden xl:block">
                 <span className="text-gray-500">
                   {price.toLocaleString('en-US', { 
-                    maximumFractionDigits: 3
+                    maximumFractionDigits: 2
                   })}
                 </span>
                 <span className={`${change > 0? 'text-green-500': 'text-red-500'}`}>
