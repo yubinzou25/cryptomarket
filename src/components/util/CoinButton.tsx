@@ -26,11 +26,9 @@ function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequest
           <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={iconUrl}/>
           <div className="flex flex-col w-1/2 hidden md:block">
               <span className="font-bold">{name}</span>
-              <div className="flex flex-row content-center justify-evenly space-x-3 hidden xl:block">
+              <div className="flex flex-row content-center space-x-2 hidden xl:block">
                 <span className="text-gray-500">
-                  {price.toLocaleString('en-US', { 
-                    maximumFractionDigits: 2
-                  })}
+                  ${price.toString().substring(0, 7)}
                 </span>
                 <span className={`${change > 0? 'text-green-500': 'text-red-500'}`}>
                   {change > 0 && '+'}{change}%
