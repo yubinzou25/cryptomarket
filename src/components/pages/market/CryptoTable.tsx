@@ -14,7 +14,8 @@ type tableData = {
 function CryptoTable() {
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
-  const {data:coinRawData} = useGetCoinsQuery(30);
+  const [tablePage, setTablePage] = useState(0);
+  const {data:coinRawData} = useGetCoinsQuery({limit:30, offset:tablePage * 30});
   useMemo(() => {
     if(!coinRawData?.data?.coins){return;}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +35,7 @@ function CryptoTable() {
         marketCap: marketCap
       }
     });
-    // By default the table is sorted by rank#
+    // By default the table is sorted by marketCap
     setSortedData(coinData);
     setSortOrder(false);
   }, [coinRawData]);
@@ -50,6 +51,10 @@ function CryptoTable() {
     }
     setSortedData(preSortedData);
   };
+
+  const handleSwitchPage = (page:number) => {
+    setTablePage(page);
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -123,6 +128,18 @@ function CryptoTable() {
               ))}
           </tbody>
         </table>
+        <div className="flex flex-row space-x-2 justify-end m-3">
+        {
+          [0, 1, 2, 3, 4, 5].map((page:number) => (
+            <button key={page} className={`font-medium rounded-lg px-4 py-2 whitespace-nowrap border border-gray-400 \
+            ${page === tablePage && 'text-primary-default border-primary-default'}
+            hover:text-primary-default hover:border-primary-default`}
+            onClick={() => handleSwitchPage(page)}>
+              {page + 1}
+            </button>
+          ))
+        }
+        </div>
     </div>
   );
 }

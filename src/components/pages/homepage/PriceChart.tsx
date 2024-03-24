@@ -14,7 +14,7 @@ type coinButtonData = {
 function PriceChart() {
   const [requestUUID, setRequestUUID] = useState('Qwsogvtv82FCd');
   const [requestPeriod, setRequestPeriod] = useState('24h');
-  const {data:coinRawData} = useGetCoinsQuery(5);
+  const {data:coinRawData} = useGetCoinsQuery({limit:5, offset:0});
   const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:requestUUID, timePeriod:requestPeriod});
   const coinData:coinButtonData[] = useMemo(() => {
     if(!coinRawData?.data?.coins){return [];}
