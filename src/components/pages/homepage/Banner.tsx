@@ -22,14 +22,20 @@ function Banner() {
               letterNum = {3}
             />
           </div>
-          <h1>ON DIGIFINEX</h1>
+          <h1>ON FINEX</h1>
         </div>
         <p className="text-lg mt-4 text-slate-600 max-w-xl">
-          Astroship is a starter template for startups, marketing websites & landing
-          pages.<wbr /> Built with Astro.build and TailwindCSS. You can quickly
-          create any website with this starter.
+          Finex is a Crypto Trading application enable for the user to track, and trade digital asset .
+          <wbr /> Built with React, Redux and Tailwind CSS.
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        <div
+            className="bg-no-repeat bg-cover bg-center"
+            style={{
+                backgroundImage: `url("/image/github_icon.svg")`,
+                width: "40px",
+                height: "40px",
+            }}/>
         <LinkButton to="https://github.com/yubinzou25/cryptomarket" buttonText="GitHub Repo" primaryColor={false}/>
         </div>
       </div>
