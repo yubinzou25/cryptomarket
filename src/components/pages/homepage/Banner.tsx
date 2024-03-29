@@ -22,11 +22,11 @@ function Banner() {
               letterNum = {3}
             />
           </div>
-          <h1>ON FINEX</h1>
+          <h1>ON DIGIFINEX</h1>
         </div>
-        <p className="text-lg mt-4 text-slate-600 max-w-xl">
-          Finex is a Crypto Trading application enable for the user to track, and trade digital asset .
-          <wbr /> Built with React, Redux and Tailwind CSS.
+        <p className="text-lg mt-4 font-semibold text-slate-600 max-w-xl">
+        Disclaimer: This website is intended solely for the purpose of demonstrating
+        <wbr /> the developer's technical skills and is not intended for real-world usage
         </p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3">
         <div
