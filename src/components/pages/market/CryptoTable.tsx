@@ -134,7 +134,8 @@ function CryptoTable() {
                   </td>
                   <td className="">
                     <Sparklines data={item.sparklines}>
-                      <SparklinesCurve color={item.change > 0? 'green': 'red'}/>
+                      <SparklinesCurve color={item.change > 0? 'green': 'red'} style={{strokeWidth: "2"}}/>
+                     
                     </Sparklines>
                   </td>
                 </tr>
@@ -143,7 +144,7 @@ function CryptoTable() {
         </table>
         <div className="flex flex-row space-x-2 justify-end m-3">
         {
-          [0, 1, 2, 3, 4, 5].map((page:number) => (
+          [0, 1, 2, 3, 4, 5, 6, 7, 8].map((page:number) => (
             <button key={page} className={`font-medium rounded-lg px-4 py-2 whitespace-nowrap border border-gray-400 \
             ${page === tablePage && 'text-primary-default border-primary-default'}
             hover:text-primary-default hover:border-primary-default`}
