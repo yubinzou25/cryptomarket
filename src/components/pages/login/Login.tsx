@@ -1,7 +1,13 @@
-
 function Login() {
   return (
-    <div>Login</div>
+    <div className="flex flex-row justify-evenly">
+      <div>
+        Log in with QR code
+      </div>
+      <div>
+        Log in DigiFinex
+      </div>
+    </div>
   )
 }
 
