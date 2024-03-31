@@ -56,26 +56,6 @@ function PriceChart() {
   };
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
-        <button
-        onClick={() => handleButtonClick('24h')}
-        className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-        border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '24h' && 'bg-gray-100'}`}>
-          1D
-        </button>
-        <button 
-        onClick={() => handleButtonClick('7d')}
-        className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-        border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '7d' && 'bg-gray-100'}`}>
-          7D
-        </button>
-        <button
-        onClick={() => handleButtonClick('30d')}
-        className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-        border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '30d' && 'bg-gray-100'}`}>
-          30D
-        </button>
-      </div>
       <div className="flex flex-col md:flex-row justify-between space-x-10">
         <div className="flex flex-row md:flex-col md:w-1/5 justify-evenly">
           {coinData.map((item, index) => (
@@ -91,7 +71,25 @@ function PriceChart() {
              />
           ))}
         </div>
-        <Chart data={priceHistory} yAxisKey={requestPeriod === '24h'? 'time':'date'}/>
+        <div className="flex-grow flex flex-col">
+          <div className='flex flex-row justify-between'>
+            <div>icon</div>
+            <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
+              {['24h', '7d', '30d'].map((val:string, idx:number) => (
+              <button
+              key={idx}
+              onClick={() => handleButtonClick(val)}
+              className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
+              border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === val && 'bg-gray-100'}`}>
+                {val}
+              </button>
+            ))}
+            </div>
+          </div>
+          <Chart data={priceHistory} yAxisKey={requestPeriod === '24h'? 'time':'date'}/>
+        </div>
+        
+        
       </div>
     </div>
   )
