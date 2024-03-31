@@ -6,6 +6,7 @@ import HomePage from './components/pages/homepage/HomePage';
 import Market from './components/pages/market/Market';
 import Login from './components/pages/login/Login';
 import SignUp from './components/pages/login/SignUp';
+import Trading from './components/pages/trading/Trading';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path = "/" element={<HomePage/>}/>
         <Route path = "market" element={<Market/>}/>
+        <Route path="/trade/:coinId" element={<Trading/>} />
         <Route path = "login" element={<Login/>}/>
         <Route path = "signup" element={<SignUp/>}/>
       </Routes>
