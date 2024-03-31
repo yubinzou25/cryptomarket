@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { useGetCoinsQuery } from "../../../api/cryptoApi";
 import { Sparklines, SparklinesCurve } from 'react-sparklines';
+import { useNavigate } from "react-router-dom";
 type tableData = {
+  coinId:string,
   rank:number,
   name:string,
   symbol:string,
@@ -13,6 +15,7 @@ type tableData = {
   sparklines:number[]
 }
 function CryptoTable() {
+  const navigate = useNavigate();
   const [sortedData, setSortedData] = useState([]);
   const [sortOrder, setSortOrder] = useState(false); // Ascending: true, Descending: false
   const [tablePage, setTablePage] = useState(0);
@@ -27,6 +30,7 @@ function CryptoTable() {
       const change = parseFloat(item.change);
       const sparklines = item.sparkline.map((ele:string) => parseFloat(ele)).filter((ele:number) => !Number.isNaN(ele));
       return {
+        coinId: item.uuid,
         rank:item.rank,
         name: item.name,
         symbol: item.symbol,
@@ -55,8 +59,11 @@ function CryptoTable() {
     setSortedData(preSortedData);
   };
 
-  const handleSwitchPage = (page:number) => {
+  const handleSwitchTable = (page:number) => {
     setTablePage(page);
+  }
+  const handleRowClick = (coinId:string) => {
+    navigate(`/trade/${coinId}`)
   }
 
   return (
@@ -107,7 +114,9 @@ function CryptoTable() {
             <tbody>
               {
               sortedData.map((item:tableData, index:number) => (
-                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handleRowClick(item.coinId)}
+                >
                   <td className="px-6 py-4 font-bold">
                     {item.rank}
                   </td>
@@ -148,7 +157,7 @@ function CryptoTable() {
             <button key={page} className={`font-medium rounded-lg px-4 py-2 whitespace-nowrap border border-gray-400 \
             ${page === tablePage && 'text-primary-default border-primary-default'}
             hover:text-primary-default hover:border-primary-default`}
-            onClick={() => handleSwitchPage(page)}>
+            onClick={() => handleSwitchTable(page)}>
               {page + 1}
             </button>
           ))
