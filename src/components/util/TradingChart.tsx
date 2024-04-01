@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useGetCoinDetailQuery, useGetCoinPriceHistoryQuery } from '../../api/cryptoApi';
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
-function CryptoChart({coinId, simplified}:{coinId: string, simplified:boolean}) {
+function TradingChart({coinId, simplified}:{coinId: string, simplified:boolean}) {
  const [requestPeriod, setRequestPeriod] = useState('24h');
  const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:coinId, timePeriod:requestPeriod});
  const {data: coinRawData} = useGetCoinDetailQuery(coinId);
@@ -112,4 +112,4 @@ const handleButtonClick = (period:string) => {
  )
 }
 
-export default CryptoChart
+export default TradingChart

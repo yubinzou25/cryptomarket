@@ -48,7 +48,8 @@ function PriceChart() {
           ))}
         </div>
         <CryptoChart
-        coinId={requestUUID}/>
+        coinId={requestUUID}
+        simplified={true}/>
       </div>
     </div>
   )
