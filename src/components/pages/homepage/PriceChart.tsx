@@ -2,7 +2,7 @@
 import { useMemo, useState } from 'react';
 import { useGetCoinsQuery } from '../../../api/cryptoApi';
 import CoinButton from '../../util/CoinButton';
-import CryptoChart from '../../util/CryptoChart';
+import Chart from '../../util/Chart';
 type coinButtonData = {
   uuid: string,
   name:string,
@@ -47,9 +47,8 @@ function PriceChart() {
              />
           ))}
         </div>
-        <CryptoChart
-        coinId={requestUUID}
-        simplified={true}/>
+        <Chart
+        coinId={requestUUID}/>
       </div>
     </div>
   )

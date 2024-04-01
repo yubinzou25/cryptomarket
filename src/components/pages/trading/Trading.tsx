@@ -9,8 +9,7 @@ function Trading() {
    {
    coinId &&
    <TradingChart
-        coinId={coinId}
-        simplified={false}/>
+     coinId={coinId}/>
   }
    </>
   );

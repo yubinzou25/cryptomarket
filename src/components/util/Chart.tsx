@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react'
-import { useGetCoinDetailQuery, useGetCoinPriceHistoryQuery } from '../../api/cryptoApi';
+import { useGetCoinPriceHistoryQuery } from '../../api/cryptoApi';
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
-function CryptoChart({coinId, simplified}:{coinId: string, simplified:boolean}) {
+function Chart({coinId}:{coinId: string}) {
  const [requestPeriod, setRequestPeriod] = useState('24h');
  const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:coinId, timePeriod:requestPeriod});
- const {data: coinRawData} = useGetCoinDetailQuery(coinId);
  const priceHistory = useMemo(() => {
   if(!priceRawData?.data?.history){return [];}
   const history = priceRawData?.data?.history;
@@ -25,31 +24,14 @@ function CryptoChart({coinId, simplified}:{coinId: string, simplified:boolean}) 
     return result;
   }, []);
 }, [priceRawData]);
-console.log(coinRawData);
-const coinData = useMemo(() => {
- if(!coinRawData?.data?.coin){return {};}
-  const item = coinRawData?.data?.coin;
-  const price = parseFloat(item.price)
-  const change = parseFloat(item.change);
-  return {
-    uuid: item.uuid,
-    name: item.name,
-    symbol: item.symbol,
-    iconUrl: item.iconUrl,
-    change: change,
-    price: price,
-  }
-}, [coinRawData]);
 
 const handleButtonClick = (period:string) => {
   setRequestPeriod(period);
 };
-
  return (
   <div className="flex-grow flex flex-col">
      <div className='flex flex-row justify-between'>
       <div>
-      {!simplified && <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={coinData.iconUrl}/>}
       </div>
        <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
          {['24h', '7d', '30d'].map((val:string, idx:number) => (
@@ -112,4 +94,4 @@ const handleButtonClick = (period:string) => {
  )
 }
 
-export default CryptoChart
+export default Chart

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { useGetCoinDetailQuery, useGetCoinPriceHistoryQuery } from '../../api/cryptoApi';
 import {Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
-function TradingChart({coinId, simplified}:{coinId: string, simplified:boolean}) {
+function TradingChart({coinId}:{coinId: string}) {
  const [requestPeriod, setRequestPeriod] = useState('24h');
  const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:coinId, timePeriod:requestPeriod});
  const {data: coinRawData} = useGetCoinDetailQuery(coinId);
@@ -49,7 +49,7 @@ const handleButtonClick = (period:string) => {
   <div className="flex-grow flex flex-col">
      <div className='flex flex-row justify-between'>
       <div>
-      {!simplified && <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={coinData.iconUrl}/>}
+      <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={coinData.iconUrl}/>
       </div>
        <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
          {['24h', '7d', '30d'].map((val:string, idx:number) => (
