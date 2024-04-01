@@ -8,7 +8,7 @@ function NavBar(){
         },
         {
           title: 'Trade',
-          path: '/trade/Qwsogvtv82FCd'
+          path: '/trade'
         },
         {
           title: 'Derivatives',

@@ -6,11 +6,8 @@ function Trading() {
 
   return (
    <div className="mt-20">
-   {
-   coinId &&
    <TradingChart
-     coinId={coinId}/>
-  }
+     coinId={coinId || 'Qwsogvtv82FCd'}/>
    </div>
   );
 }
