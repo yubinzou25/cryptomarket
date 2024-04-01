@@ -25,7 +25,6 @@ function TradingChart({coinId}:{coinId: string}) {
     return result;
   }, []);
 }, [priceRawData]);
-console.log(coinRawData);
 const coinData = useMemo(() => {
  if(!coinRawData?.data?.coin){return {};}
   const item = coinRawData?.data?.coin;
@@ -47,9 +46,11 @@ const handleButtonClick = (period:string) => {
 
  return (
   <div className="flex-grow flex flex-col">
-     <div className='flex flex-row justify-between'>
-      <div>
+     <div className="flex flex-row justify-between">
+      <div className="flex flex-row space-x-5 items-center">
       <img className={"w-10 h-10 relative overflow-hidden rounded-full"} src={coinData.iconUrl}/>
+      <span className="text-xl font-semibold">{coinData.name}</span>
+      <span> {}</span>
       </div>
        <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
          {['24h', '7d', '30d'].map((val:string, idx:number) => (
