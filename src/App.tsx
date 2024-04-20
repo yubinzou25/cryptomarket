@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path = "/" element={<HomePage/>}/>
         <Route path = "market" element={<Market/>}/>
+        <Route path="/trade" element={<Trading/>} />
         <Route path="/trade/:coinId" element={<Trading/>} />
         <Route path = "login" element={<Login/>}/>
         <Route path = "signup" element={<SignUp/>}/>

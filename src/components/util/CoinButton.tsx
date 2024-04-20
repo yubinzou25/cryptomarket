@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequestUUID}:{name:string, uuid:string, iconUrl:string, change:number, price:number, requestUUID:string, setRequestUUID: (uuid:string) => void}) {
+function CoinButton({name, uuid, iconUrl, change, price, requestUUID, setRequestUUID}:{name:string, uuid:string, iconUrl:string, change:number, price:number,
+   requestUUID:string, setRequestUUID: (uuid:string) => void}) {
   const handleButtonClick = () => {
     setRequestUUID(uuid);
   };

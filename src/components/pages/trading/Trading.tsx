@@ -1,60 +1,42 @@
 import { useParams } from 'react-router-dom';
-import { useGetCoinPriceHistoryQuery } from '../../../api/cryptoApi';
-import { useMemo, useState } from 'react';
-import Chart from '../../util/Chart';
+
+import TradingChart from '../../util/TradingChart';
 function Trading() {
- const [requestPeriod, setRequestPeriod] = useState('24h');
  const { coinId } = useParams<{ coinId: string }>();
- const {data:priceRawData} = useGetCoinPriceHistoryQuery({coinId:coinId, timePeriod:requestPeriod});
- const priceHistory = useMemo(() => {
-  if(!priceRawData?.data?.history){return [];}
-  const history = priceRawData?.data?.history;
-  const rate = Math.floor(history.length / 100);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return history.reduce((result:any, value:any, index:any) => {
-    // Used to adjust sample rate in the future 
-    if (index % rate === 0) {
-      const date = new Date(value.timestamp * 1000);
-      const price = parseFloat(value.price);
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      result.push({price:price, time: `${hours}:${minutes}`, date: `${month}-${day}`});
-    }
-    return result;
-  }, []);
-}, [priceRawData]);
-const handleButtonClick = (period:string) => {
- setRequestPeriod(period);
-};
+
   return (
-   <div className="flex flex-col">
-   <div className="flex flex-row justify-end text-sm font-medium bg-white text-gray-800">
-     <button
-     onClick={() => handleButtonClick('24h')}
-     className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-     border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '24h' && 'bg-gray-100'}`}>
-       1D
-     </button>
-     <button 
-     onClick={() => handleButtonClick('7d')}
-     className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-     border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '7d' && 'bg-gray-100'}`}>
-       7D
-     </button>
-     <button
-     onClick={() => handleButtonClick('30d')}
-     className={`py-3 px-4 items-center gap-x-2 -ms-px first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 
-     border border-gray-200 shadow-sm hover:bg-gray-100 ${requestPeriod === '30d' && 'bg-gray-100'}`}>
-       30D
-     </button>
+   <div className="flex flex-row mt-20">
+   <TradingChart
+     coinId={coinId || 'Qwsogvtv82FCd'}/>
+   <div className="flex flex-col shadow-xl">
+    <div className="flex flex-row justify-evenly">
+     <button className="p-5 broder-1">Buy BTC</button>
+     <button className="p-5">Sell BTC</button>
+    </div>
+    <div className="flex flex-col">
+    <div className="flex flex-row justify-evenly">
+      <div>Invest in</div>
+      <select id="currency" name="currency" className="w-1/2 py-1.5 pl-7 pr-10 h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+        <option>USD</option>
+        <option>CAD</option>
+        <option>EUR</option>
+      </select>
+     </div>
+     <div className="flex flex-row justify-evenly">
+      <div>Amount</div>
+      <input type="text" placeholder="$0.00" className="w-1/2 py-1.5 pl-7 pr-10 rounded-md bg-gray-100 ring-1 ring-inset ring-gray-500 text-gray-900"></input>
+     </div>
+     <div className="flex flex-row justify-evenly">
+      <div>Est. Quantity</div>
+      <span className="w-1/2 py-1.5 pl-7 pr-10">0</span>
+     </div>
+     <button className="font-medium rounded-lg px-4 py-2 mx-5 whitespace-nowrap bg-primary-default hover:bg-primary-hover">
+        place order
+    </button>
+    </div>
    </div>
-   <div className="flex flex-col md:flex-row justify-between space-x-10">
-     <Chart data={priceHistory} yAxisKey={requestPeriod === '24h'? 'time':'date'}/>
    </div>
- </div>
-  )
+  );
 }
 
 export default Trading

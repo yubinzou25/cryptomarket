@@ -8,25 +8,19 @@ function NavBar(){
         },
         {
           title: 'Trade',
-          path: "/",
-          children: [
-            { title: "Spot", path: "/" },
-            { title: "Margin (Leveraged)", path: "/" },
-            { title: "ETF", path: "/" },
-
-          ],
+          path: '/trade'
         },
         {
-          title: "Derivatives",
-          path: "/",
+          title: 'Derivatives',
+          path: '/',
         },
         {
-          title: "Wealth",
-          path: "/",
+          title: 'Wealth',
+          path: '/',
         },
         {
-          title: "Pro Version",
-          path: "/",
+          title: 'Pro Version',
+          path: '/',
         },
       ];
     return (
