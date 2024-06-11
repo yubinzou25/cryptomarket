@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-ui": "npx playwright test"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
@@ -23,6 +24,8 @@
     "recharts": "^2.12.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/react-sparklines": "^1.7.5",

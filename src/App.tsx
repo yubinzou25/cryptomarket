@@ -9,8 +9,6 @@ import SignUp from './components/pages/login/SignUp';
 import Trading from './components/pages/trading/Trading';
 
 function App() {
-
-
   return (
     <div className="mx-auto max-w-screen-xl px-20">
       <Header/>
